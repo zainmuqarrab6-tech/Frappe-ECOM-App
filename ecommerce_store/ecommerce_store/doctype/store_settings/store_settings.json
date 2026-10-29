@@ -1,0 +1,142 @@
+{
+ "actions": [],
+ "creation": "2026-10-29 11:49:58.525220",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sec_store",
+  "store_name",
+  "store_email",
+  "store_phone",
+  "col_store",
+  "currency",
+  "currency_symbol",
+  "order_prefix",
+  "sec_checkout",
+  "default_shipping_fee",
+  "free_shipping_threshold",
+  "tax_percentage",
+  "col_checkout",
+  "allow_guest_checkout",
+  "allow_cod",
+  "allow_online_payment"
+ ],
+ "fields": [
+  {
+   "fieldname": "sec_store",
+   "fieldtype": "Section Break",
+   "label": "Store Details"
+  },
+  {
+   "default": "My E-Commerce Store",
+   "fieldname": "store_name",
+   "fieldtype": "Data",
+   "label": "Store Name"
+  },
+  {
+   "fieldname": "store_email",
+   "fieldtype": "Data",
+   "label": "Support Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "store_phone",
+   "fieldtype": "Data",
+   "label": "Store Phone"
+  },
+  {
+   "fieldname": "col_store",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "PKR",
+   "fieldname": "currency",
+   "fieldtype": "Data",
+   "label": "Currency Code"
+  },
+  {
+   "default": "Rs.",
+   "fieldname": "currency_symbol",
+   "fieldtype": "Data",
+   "label": "Currency Symbol"
+  },
+  {
+   "default": "ORD-",
+   "fieldname": "order_prefix",
+   "fieldtype": "Data",
+   "label": "Order Prefix"
+  },
+  {
+   "fieldname": "sec_checkout",
+   "fieldtype": "Section Break",
+   "label": "Checkout, Shipping & Taxes"
+  },
+  {
+   "default": "200",
+   "fieldname": "default_shipping_fee",
+   "fieldtype": "Currency",
+   "label": "Default Shipping Fee"
+  },
+  {
+   "default": "3000",
+   "fieldname": "free_shipping_threshold",
+   "fieldtype": "Currency",
+   "label": "Free Shipping Minimum Order"
+  },
+  {
+   "default": "0",
+   "fieldname": "tax_percentage",
+   "fieldtype": "Percent",
+   "label": "Sales Tax (%)"
+  },
+  {
+   "fieldname": "col_checkout",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "allow_guest_checkout",
+   "fieldtype": "Check",
+   "label": "Allow Guest Checkout"
+  },
+  {
+   "default": "1",
+   "fieldname": "allow_cod",
+   "fieldtype": "Check",
+   "label": "Enable Cash on Delivery"
+  },
+  {
+   "default": "0",
+   "fieldname": "allow_online_payment",
+   "fieldtype": "Check",
+   "label": "Enable Online Payment"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-10-29 11:49:58.525220",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Store",
+ "name": "Store Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
