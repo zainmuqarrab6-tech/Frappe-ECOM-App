@@ -7,7 +7,7 @@
    "chart_name": "Daily Sales Trend"
   }
  ],
- "content": "[{\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83d\\udcca Store Performance KPIs</span>\", \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Total Revenue\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Total Orders\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Pending Orders\", \"col\": 2}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Active Products\", \"col\": 2}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Total Customers\", \"col\": 2}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83d\\udcc8 Sales & Orders Analytics</span>\", \"col\": 12}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Daily Sales Trend\", \"col\": 7}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Orders by Status\", \"col\": 5}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\u26a1 Quick Store Actions</span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Pending Orders\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"All Orders\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Products\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Low Stock Alerts\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Customers\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Discounts & Coupons\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Store Settings\", \"col\": 3}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83d\\udcc2 Store Management Modules</span>\", \"col\": 12}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Catalog Management\", \"col\": 3}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Sales & Orders\", \"col\": 3}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Customer Hub\", \"col\": 3}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Promotions & Settings\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83d\\udcca Store Performance KPIs</span>\", \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Total Revenue\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Total Orders\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Pending Orders\", \"col\": 2}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Active Products\", \"col\": 2}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Total Customers\", \"col\": 2}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83c\\udfa8 Storefront Design & Customizer (Shopify-Style)</span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Store Customizer\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Hero Banners\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Navigation Menus\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Pages & Policies\", \"col\": 3}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83d\\udcc8 Sales & Orders Analytics</span>\", \"col\": 12}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Daily Sales Trend\", \"col\": 7}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Orders by Status\", \"col\": 5}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\u26a1 Commerce Operations</span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Pending Orders\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"All Orders\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Products\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Low Stock Alerts\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Customers\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Product Reviews\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Discounts & Coupons\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Store Settings\", \"col\": 3}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83d\\udcc2 Store Management Modules</span>\", \"col\": 12}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Storefront Customizer\", \"col\": 3}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Catalog Management\", \"col\": 3}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Sales & Orders\", \"col\": 3}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Customer & Marketing\", \"col\": 3}}]",
  "creation": "2026-10-29 11:52:01.320515",
  "custom_blocks": [],
  "docstatus": 0,
@@ -19,6 +19,56 @@
  "is_hidden": 0,
  "label": "Ecommerce Store",
  "links": [
+  {
+   "hidden": 0,
+   "icon": "tool",
+   "is_query_report": 0,
+   "label": "Storefront Customizer",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Theme & Brand Colors",
+   "link_count": 0,
+   "link_to": "Store Theme Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Hero Sliders & Banners",
+   "link_count": 0,
+   "link_to": "Store Banner",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Header & Footer Menus",
+   "link_count": 0,
+   "link_to": "Store Navigation Menu",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Custom Pages & Policies",
+   "link_count": 0,
+   "link_to": "Store Page",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
   {
    "hidden": 0,
    "icon": "box",
@@ -61,6 +111,16 @@
   },
   {
    "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customer Reviews & Ratings",
+   "link_count": 0,
+   "link_to": "Product Review",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
    "icon": "shopping-cart",
    "is_query_report": 0,
    "label": "Sales & Orders",
@@ -82,7 +142,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Active Carts",
+   "label": "Active Shopping Carts",
    "link_count": 0,
    "link_to": "Store Cart",
    "link_type": "DocType",
@@ -93,7 +153,7 @@
    "hidden": 0,
    "icon": "users",
    "is_query_report": 0,
-   "label": "Customer Hub",
+   "label": "Customer & Marketing",
    "link_count": 0,
    "link_type": "DocType",
    "onboard": 0,
@@ -102,7 +162,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "All Customers",
+   "label": "Customers Directory",
    "link_count": 0,
    "link_to": "Store Customer",
    "link_type": "DocType",
@@ -112,27 +172,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Delivery Addresses",
-   "link_count": 0,
-   "link_to": "Store Customer Address",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "icon": "settings",
-   "is_query_report": 0,
-   "label": "Promotions & Settings",
-   "link_count": 0,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Coupons & Discounts",
+   "label": "Promotions & Coupons",
    "link_count": 0,
    "link_to": "Store Coupon",
    "link_type": "DocType",
@@ -142,7 +182,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Store Settings",
+   "label": "Shipping & Taxes Config",
    "link_count": 0,
    "link_to": "Store Settings",
    "link_type": "DocType",
@@ -150,7 +190,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-10-29 12:00:39.506757",
+ "modified": "2026-10-29 14:06:20.945941",
  "modified_by": "Administrator",
  "module": "Ecommerce Store",
  "name": "Ecommerce Store",
@@ -178,6 +218,38 @@
  "sequence_id": 1.0,
  "shortcuts": [
   {
+   "color": "Purple",
+   "doc_view": "",
+   "label": "Store Customizer",
+   "link_to": "Store Theme Settings",
+   "type": "DocType"
+  },
+  {
+   "color": "Blue",
+   "doc_view": "",
+   "format": "{} Active Banners",
+   "label": "Hero Banners",
+   "link_to": "Store Banner",
+   "stats_filter": "{\"is_active\": 1}",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "",
+   "label": "Navigation Menus",
+   "link_to": "Store Navigation Menu",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "format": "{} Pages",
+   "label": "Pages & Policies",
+   "link_to": "Store Page",
+   "stats_filter": "{}",
+   "type": "DocType"
+  },
+  {
    "color": "Orange",
    "doc_view": "",
    "format": "{} Pending",
@@ -198,7 +270,7 @@
   {
    "color": "Green",
    "doc_view": "",
-   "format": "{} In Catalog",
+   "format": "{} Products",
    "label": "Products",
    "link_to": "Product",
    "stats_filter": "{}",
@@ -219,6 +291,15 @@
    "format": "{} Customers",
    "label": "Customers",
    "link_to": "Store Customer",
+   "stats_filter": "{}",
+   "type": "DocType"
+  },
+  {
+   "color": "Yellow",
+   "doc_view": "",
+   "format": "{} Reviews",
+   "label": "Product Reviews",
+   "link_to": "Product Review",
    "stats_filter": "{}",
    "type": "DocType"
   },

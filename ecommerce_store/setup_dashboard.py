@@ -2,131 +2,11 @@ import frappe
 import json
 
 def setup_dashboard():
-    print("Setting up Ecommerce Dashboard, Number Cards, and Charts...")
+    print("Updating Workspace with Store Customizer, Themes, Banners, CMS & Reviews...")
 
-    # 1. Number Cards
-    cards = [
-        {
-            "name": "Ecom Total Revenue",
-            "label": "Total Revenue",
-            "type": "Document Type",
-            "document_type": "Store Order",
-            "function": "Sum",
-            "aggregate_function_based_on": "grand_total",
-            "filters_json": json.dumps([["Store Order", "order_status", "!=", "Cancelled"]]),
-            "color": "#10B981",
-            "is_public": 1,
-            "is_standard": 1,
-            "module": "Ecommerce Store"
-        },
-        {
-            "name": "Ecom Total Orders",
-            "label": "Total Orders",
-            "type": "Document Type",
-            "document_type": "Store Order",
-            "function": "Count",
-            "filters_json": "[]",
-            "color": "#3B82F6",
-            "is_public": 1,
-            "is_standard": 1,
-            "module": "Ecommerce Store"
-        },
-        {
-            "name": "Ecom Pending Orders",
-            "label": "Pending Orders",
-            "type": "Document Type",
-            "document_type": "Store Order",
-            "function": "Count",
-            "filters_json": json.dumps([["Store Order", "order_status", "=", "Pending"]]),
-            "color": "#F59E0B",
-            "is_public": 1,
-            "is_standard": 1,
-            "module": "Ecommerce Store"
-        },
-        {
-            "name": "Ecom Active Products",
-            "label": "Active Products",
-            "type": "Document Type",
-            "document_type": "Product",
-            "function": "Count",
-            "filters_json": json.dumps([["Product", "is_active", "=", 1]]),
-            "color": "#8B5CF6",
-            "is_public": 1,
-            "is_standard": 1,
-            "module": "Ecommerce Store"
-        },
-        {
-            "name": "Ecom Total Customers",
-            "label": "Total Customers",
-            "type": "Document Type",
-            "document_type": "Store Customer",
-            "function": "Count",
-            "filters_json": "[]",
-            "color": "#EC4899",
-            "is_public": 1,
-            "is_standard": 1,
-            "module": "Ecommerce Store"
-        }
-    ]
-
-    for c in cards:
-        card_name = c["name"]
-        if frappe.db.exists("Number Card", card_name):
-            doc = frappe.get_doc("Number Card", card_name)
-            doc.update(c)
-            doc.save(ignore_permissions=True)
-            print(f"Updated Number Card: {card_name}")
-        else:
-            doc = frappe.get_doc(dict(doctype="Number Card", **c))
-            doc.insert(ignore_permissions=True)
-            print(f"Created Number Card: {card_name}")
-
-    # 2. Dashboard Charts
-    charts = [
-        {
-            "chart_name": "Orders by Status",
-            "chart_type": "Group By",
-            "document_type": "Store Order",
-            "group_by_based_on": "order_status",
-            "group_by_type": "Count",
-            "type": "Donut",
-            "filters_json": "[]",
-            "is_public": 1,
-            "is_standard": 1,
-            "module": "Ecommerce Store"
-        },
-        {
-            "chart_name": "Daily Sales Trend",
-            "chart_type": "Sum",
-            "document_type": "Store Order",
-            "based_on": "creation",
-            "value_based_on": "grand_total",
-            "timeseries": 1,
-            "time_interval": "Daily",
-            "timespan": "Last Month",
-            "type": "Bar",
-            "filters_json": "[]",
-            "is_public": 1,
-            "is_standard": 1,
-            "module": "Ecommerce Store"
-        }
-    ]
-
-    for ch in charts:
-        name = ch["chart_name"]
-        if frappe.db.exists("Dashboard Chart", name):
-            doc = frappe.get_doc("Dashboard Chart", name)
-            doc.update(ch)
-            doc.save(ignore_permissions=True)
-            print(f"Updated Dashboard Chart: {name}")
-        else:
-            doc = frappe.get_doc(dict(doctype="Dashboard Chart", **ch))
-            doc.insert(ignore_permissions=True)
-            print(f"Created Dashboard Chart: {name}")
-
-    # 3. Update Workspace with Rich Layout
+    # Workspace Content Layout
     ws_content = [
-        # KPI Header & Number Cards
+        # Store KPIs
         {"type": "header", "data": {"text": "<span class='h4 font-weight-bold'>📊 Store Performance KPIs</span>", "col": 12}},
         {"type": "number_card", "data": {"card_name": "Total Revenue", "col": 3}},
         {"type": "number_card", "data": {"card_name": "Total Orders", "col": 3}},
@@ -136,34 +16,74 @@ def setup_dashboard():
 
         {"type": "spacer", "data": {"col": 12}},
 
-        # Charts Section
+        # Shopify-Like Store Customizer Row
+        {"type": "header", "data": {"text": "<span class='h4 font-weight-bold'>🎨 Storefront Design & Customizer (Shopify-Style)</span>", "col": 12}},
+        {"type": "shortcut", "data": {"shortcut_name": "Store Customizer", "col": 3}},
+        {"type": "shortcut", "data": {"shortcut_name": "Hero Banners", "col": 3}},
+        {"type": "shortcut", "data": {"shortcut_name": "Navigation Menus", "col": 3}},
+        {"type": "shortcut", "data": {"shortcut_name": "Pages & Policies", "col": 3}},
+
+        {"type": "spacer", "data": {"col": 12}},
+
+        # Sales & Orders Analytics
         {"type": "header", "data": {"text": "<span class='h4 font-weight-bold'>📈 Sales & Orders Analytics</span>", "col": 12}},
         {"type": "chart", "data": {"chart_name": "Daily Sales Trend", "col": 7}},
         {"type": "chart", "data": {"chart_name": "Orders by Status", "col": 5}},
 
         {"type": "spacer", "data": {"col": 12}},
 
-        # Quick Actions Header
-        {"type": "header", "data": {"text": "<span class='h4 font-weight-bold'>⚡ Quick Store Actions</span>", "col": 12}},
+        # Quick Actions
+        {"type": "header", "data": {"text": "<span class='h4 font-weight-bold'>⚡ Commerce Operations</span>", "col": 12}},
         {"type": "shortcut", "data": {"shortcut_name": "Pending Orders", "col": 3}},
         {"type": "shortcut", "data": {"shortcut_name": "All Orders", "col": 3}},
         {"type": "shortcut", "data": {"shortcut_name": "Products", "col": 3}},
         {"type": "shortcut", "data": {"shortcut_name": "Low Stock Alerts", "col": 3}},
         {"type": "shortcut", "data": {"shortcut_name": "Customers", "col": 3}},
+        {"type": "shortcut", "data": {"shortcut_name": "Product Reviews", "col": 3}},
         {"type": "shortcut", "data": {"shortcut_name": "Discounts & Coupons", "col": 3}},
         {"type": "shortcut", "data": {"shortcut_name": "Store Settings", "col": 3}},
 
         {"type": "spacer", "data": {"col": 12}},
 
-        # Management Cards
+        # Modules
         {"type": "header", "data": {"text": "<span class='h4 font-weight-bold'>📂 Store Management Modules</span>", "col": 12}},
+        {"type": "card", "data": {"card_name": "Storefront Customizer", "col": 3}},
         {"type": "card", "data": {"card_name": "Catalog Management", "col": 3}},
         {"type": "card", "data": {"card_name": "Sales & Orders", "col": 3}},
-        {"type": "card", "data": {"card_name": "Customer Hub", "col": 3}},
-        {"type": "card", "data": {"card_name": "Promotions & Settings", "col": 3}}
+        {"type": "card", "data": {"card_name": "Customer & Marketing", "col": 3}}
     ]
 
     ws_shortcuts = [
+        # Store Customizer Shortcuts
+        {
+            "label": "Store Customizer",
+            "link_to": "Store Theme Settings",
+            "type": "DocType",
+            "color": "Purple"
+        },
+        {
+            "label": "Hero Banners",
+            "link_to": "Store Banner",
+            "type": "DocType",
+            "color": "Blue",
+            "format": "{} Active Banners",
+            "stats_filter": json.dumps({"is_active": 1})
+        },
+        {
+            "label": "Navigation Menus",
+            "link_to": "Store Navigation Menu",
+            "type": "DocType",
+            "color": "Green"
+        },
+        {
+            "label": "Pages & Policies",
+            "link_to": "Store Page",
+            "type": "DocType",
+            "color": "Grey",
+            "format": "{} Pages",
+            "stats_filter": "{}"
+        },
+        # Commerce Operations
         {
             "label": "Pending Orders",
             "link_to": "Store Order",
@@ -185,7 +105,7 @@ def setup_dashboard():
             "link_to": "Product",
             "type": "DocType",
             "color": "Green",
-            "format": "{} In Catalog",
+            "format": "{} Products",
             "stats_filter": "{}"
         },
         {
@@ -205,6 +125,14 @@ def setup_dashboard():
             "stats_filter": "{}"
         },
         {
+            "label": "Product Reviews",
+            "link_to": "Product Review",
+            "type": "DocType",
+            "color": "Yellow",
+            "format": "{} Reviews",
+            "stats_filter": "{}"
+        },
+        {
             "label": "Discounts & Coupons",
             "link_to": "Store Coupon",
             "type": "DocType",
@@ -221,26 +149,30 @@ def setup_dashboard():
     ]
 
     ws_links = [
-        # Card 1: Catalog Management
+        # Card 1: Storefront Customizer
+        {"type": "Card Break", "label": "Storefront Customizer", "icon": "tool"},
+        {"type": "Link", "link_type": "DocType", "link_to": "Store Theme Settings", "label": "Theme & Brand Colors"},
+        {"type": "Link", "link_type": "DocType", "link_to": "Store Banner", "label": "Hero Sliders & Banners"},
+        {"type": "Link", "link_type": "DocType", "link_to": "Store Navigation Menu", "label": "Header & Footer Menus"},
+        {"type": "Link", "link_type": "DocType", "link_to": "Store Page", "label": "Custom Pages & Policies"},
+
+        # Card 2: Catalog Management
         {"type": "Card Break", "label": "Catalog Management", "icon": "box"},
         {"type": "Link", "link_type": "DocType", "link_to": "Product", "label": "All Products"},
         {"type": "Link", "link_type": "DocType", "link_to": "Product Category", "label": "Categories"},
         {"type": "Link", "link_type": "DocType", "link_to": "Product Brand", "label": "Brands"},
+        {"type": "Link", "link_type": "DocType", "link_to": "Product Review", "label": "Customer Reviews & Ratings"},
 
-        # Card 2: Sales & Orders
+        # Card 3: Sales & Orders
         {"type": "Card Break", "label": "Sales & Orders", "icon": "shopping-cart"},
         {"type": "Link", "link_type": "DocType", "link_to": "Store Order", "label": "Customer Orders"},
-        {"type": "Link", "link_type": "DocType", "link_to": "Store Cart", "label": "Active Carts"},
+        {"type": "Link", "link_type": "DocType", "link_to": "Store Cart", "label": "Active Shopping Carts"},
 
-        # Card 3: Customer Hub
-        {"type": "Card Break", "label": "Customer Hub", "icon": "users"},
-        {"type": "Link", "link_type": "DocType", "link_to": "Store Customer", "label": "All Customers"},
-        {"type": "Link", "link_type": "DocType", "link_to": "Store Customer Address", "label": "Delivery Addresses"},
-
-        # Card 4: Promotions & Settings
-        {"type": "Card Break", "label": "Promotions & Settings", "icon": "settings"},
-        {"type": "Link", "link_type": "DocType", "link_to": "Store Coupon", "label": "Coupons & Discounts"},
-        {"type": "Link", "link_type": "DocType", "link_to": "Store Settings", "label": "Store Settings"}
+        # Card 4: Customer & Marketing
+        {"type": "Card Break", "label": "Customer & Marketing", "icon": "users"},
+        {"type": "Link", "link_type": "DocType", "link_to": "Store Customer", "label": "Customers Directory"},
+        {"type": "Link", "link_type": "DocType", "link_to": "Store Coupon", "label": "Promotions & Coupons"},
+        {"type": "Link", "link_type": "DocType", "link_to": "Store Settings", "label": "Shipping & Taxes Config"}
     ]
 
     ws_doc = frappe.get_doc("Workspace", "Ecommerce Store")
@@ -258,12 +190,9 @@ def setup_dashboard():
         {"chart_name": "Orders by Status"},
         {"chart_name": "Daily Sales Trend"}
     ])
-    ws_doc.sequence_id = 1.0  # Show at the very top of the desk sidebar!
     ws_doc.save(ignore_permissions=True)
-    print("Workspace updated with rich dashboard layout!")
-
     frappe.db.commit()
-    print("Dashboard setup committed successfully!")
+    print("Workspace updated with Store Customizer successfully!")
 
 if __name__ == "__main__":
     setup_dashboard()

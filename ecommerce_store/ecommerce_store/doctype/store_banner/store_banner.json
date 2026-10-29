@@ -1,0 +1,139 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:BANNER-{#####}",
+ "creation": "2026-10-29 14:04:27.337710",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "banner_type",
+  "sort_order",
+  "is_active",
+  "sec_content",
+  "heading",
+  "subheading",
+  "button_text",
+  "button_link",
+  "sec_media",
+  "image",
+  "mobile_image"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Banner Title (Internal)",
+   "reqd": 1
+  },
+  {
+   "default": "Hero Slider",
+   "fieldname": "banner_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Banner Type",
+   "options": "Hero Slider\nPromotional Banner\nSide Banner",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "sort_order",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Sort Order"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "sec_content",
+   "fieldtype": "Section Break",
+   "label": "Banner Content"
+  },
+  {
+   "fieldname": "heading",
+   "fieldtype": "Data",
+   "label": "Headline Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "subheading",
+   "fieldtype": "Small Text",
+   "label": "Subheading / Tagline"
+  },
+  {
+   "default": "Shop Now",
+   "fieldname": "button_text",
+   "fieldtype": "Data",
+   "label": "Button Label"
+  },
+  {
+   "default": "/shop",
+   "fieldname": "button_link",
+   "fieldtype": "Data",
+   "label": "Button Target Link"
+  },
+  {
+   "fieldname": "sec_media",
+   "fieldtype": "Section Break",
+   "label": "Banner Images"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Desktop Image (1920x600 recommended)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mobile_image",
+   "fieldtype": "Attach Image",
+   "label": "Mobile Image (800x800 recommended)"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-10-29 14:04:27.337710",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Store",
+ "name": "Store Banner",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

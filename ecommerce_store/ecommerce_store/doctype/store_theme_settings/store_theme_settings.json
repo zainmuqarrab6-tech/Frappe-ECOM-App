@@ -1,0 +1,183 @@
+{
+ "actions": [],
+ "creation": "2026-10-29 14:04:27.596509",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sec_brand",
+  "store_logo",
+  "favicon",
+  "store_tagline",
+  "sec_announcement",
+  "enable_announcement_bar",
+  "announcement_text",
+  "announcement_link",
+  "announcement_bg_color",
+  "announcement_text_color",
+  "sec_colors",
+  "primary_color",
+  "secondary_color",
+  "accent_color",
+  "font_family",
+  "sec_footer",
+  "footer_about_text",
+  "social_whatsapp",
+  "social_facebook",
+  "social_instagram",
+  "social_tiktok",
+  "copyright_text"
+ ],
+ "fields": [
+  {
+   "fieldname": "sec_brand",
+   "fieldtype": "Section Break",
+   "label": "Brand Assets"
+  },
+  {
+   "fieldname": "store_logo",
+   "fieldtype": "Attach Image",
+   "label": "Store Logo"
+  },
+  {
+   "fieldname": "favicon",
+   "fieldtype": "Attach Image",
+   "label": "Favicon"
+  },
+  {
+   "default": "The Best Products, Delivered Fast",
+   "fieldname": "store_tagline",
+   "fieldtype": "Data",
+   "label": "Store Tagline"
+  },
+  {
+   "fieldname": "sec_announcement",
+   "fieldtype": "Section Break",
+   "label": "Top Announcement Bar"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_announcement_bar",
+   "fieldtype": "Check",
+   "label": "Enable Announcement Bar"
+  },
+  {
+   "default": "\ud83c\udf89 Free Shipping on orders over Rs. 3,000 | Use Code: WELCOME10",
+   "fieldname": "announcement_text",
+   "fieldtype": "Data",
+   "label": "Announcement Text"
+  },
+  {
+   "default": "/shop",
+   "fieldname": "announcement_link",
+   "fieldtype": "Data",
+   "label": "Announcement Click Link"
+  },
+  {
+   "default": "#0f172a",
+   "fieldname": "announcement_bg_color",
+   "fieldtype": "Data",
+   "label": "Announcement Background Color (HEX)"
+  },
+  {
+   "default": "#ffffff",
+   "fieldname": "announcement_text_color",
+   "fieldtype": "Data",
+   "label": "Announcement Text Color (HEX)"
+  },
+  {
+   "fieldname": "sec_colors",
+   "fieldtype": "Section Break",
+   "label": "Theme Colors & Styling"
+  },
+  {
+   "default": "#0284c7",
+   "fieldname": "primary_color",
+   "fieldtype": "Data",
+   "label": "Primary Brand Color (Buttons & Highlights)"
+  },
+  {
+   "default": "#0f172a",
+   "fieldname": "secondary_color",
+   "fieldtype": "Data",
+   "label": "Secondary Color (Dark Headers/Footers)"
+  },
+  {
+   "default": "#f59e0b",
+   "fieldname": "accent_color",
+   "fieldtype": "Data",
+   "label": "Accent Color (Badges/Sale)"
+  },
+  {
+   "default": "Inter",
+   "fieldname": "font_family",
+   "fieldtype": "Select",
+   "label": "Primary Font",
+   "options": "Inter\nRoboto\nPoppins\nMontserrat\nOpen Sans"
+  },
+  {
+   "fieldname": "sec_footer",
+   "fieldtype": "Section Break",
+   "label": "Footer & Social Media Links"
+  },
+  {
+   "default": "Your trusted destination for premium electronics, fashion, and home goods with nationwide cash on delivery.",
+   "fieldname": "footer_about_text",
+   "fieldtype": "Small Text",
+   "label": "Footer About Us Text"
+  },
+  {
+   "default": "+923001234567",
+   "fieldname": "social_whatsapp",
+   "fieldtype": "Data",
+   "label": "WhatsApp Support Number"
+  },
+  {
+   "fieldname": "social_facebook",
+   "fieldtype": "Data",
+   "label": "Facebook Page URL"
+  },
+  {
+   "fieldname": "social_instagram",
+   "fieldtype": "Data",
+   "label": "Instagram Profile URL"
+  },
+  {
+   "fieldname": "social_tiktok",
+   "fieldtype": "Data",
+   "label": "TikTok URL"
+  },
+  {
+   "default": "\u00a9 2026 ProStore Ecommerce. All Rights Reserved.",
+   "fieldname": "copyright_text",
+   "fieldtype": "Data",
+   "label": "Copyright Notice"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-10-29 14:04:27.596509",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Store",
+ "name": "Store Theme Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
