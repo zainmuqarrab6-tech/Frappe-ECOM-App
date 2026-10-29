@@ -99,3 +99,4 @@ def submit_review(product_id, customer_name, customer_email, rating, review_text
     except Exception as e:
         frappe.log_error("submit_review error", str(e))
         return {"status": "error", "message": str(e)}
+

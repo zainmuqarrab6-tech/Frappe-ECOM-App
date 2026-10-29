@@ -172,3 +172,4 @@ def create_customizer_doctypes():
 
 if __name__ == "__main__":
     create_customizer_doctypes()
+
