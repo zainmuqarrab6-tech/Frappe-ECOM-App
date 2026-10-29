@@ -2,7 +2,7 @@ import frappe
 import json
 
 def setup_dashboard():
-    print("Updating Workspace with Store Customizer, Themes, Banners, CMS & Reviews...")
+    print("Updating Workspace with Store Customizer, Themes, Banners, CMS, Reviews & Stock Adjustment...")
 
     # Workspace Content Layout
     ws_content = [
@@ -38,6 +38,7 @@ def setup_dashboard():
         {"type": "shortcut", "data": {"shortcut_name": "All Orders", "col": 3}},
         {"type": "shortcut", "data": {"shortcut_name": "Products", "col": 3}},
         {"type": "shortcut", "data": {"shortcut_name": "Low Stock Alerts", "col": 3}},
+        {"type": "shortcut", "data": {"shortcut_name": "Inventory Restock", "col": 3}},
         {"type": "shortcut", "data": {"shortcut_name": "Customers", "col": 3}},
         {"type": "shortcut", "data": {"shortcut_name": "Product Reviews", "col": 3}},
         {"type": "shortcut", "data": {"shortcut_name": "Discounts & Coupons", "col": 3}},
@@ -117,6 +118,14 @@ def setup_dashboard():
             "stats_filter": json.dumps({"track_inventory": 1, "stock_quantity": ["<=", 5]})
         },
         {
+            "label": "Inventory Restock",
+            "link_to": "Stock Adjustment",
+            "type": "DocType",
+            "color": "Cyan",
+            "format": "{} Restocks",
+            "stats_filter": "{}"
+        },
+        {
             "label": "Customers",
             "link_to": "Store Customer",
             "type": "DocType",
@@ -159,6 +168,7 @@ def setup_dashboard():
         # Card 2: Catalog Management
         {"type": "Card Break", "label": "Catalog Management", "icon": "box"},
         {"type": "Link", "link_type": "DocType", "link_to": "Product", "label": "All Products"},
+        {"type": "Link", "link_type": "DocType", "link_to": "Stock Adjustment", "label": "Inventory Restock & Adjustments"},
         {"type": "Link", "link_type": "DocType", "link_to": "Product Category", "label": "Categories"},
         {"type": "Link", "link_type": "DocType", "link_to": "Product Brand", "label": "Brands"},
         {"type": "Link", "link_type": "DocType", "link_to": "Product Review", "label": "Customer Reviews & Ratings"},
@@ -192,7 +202,7 @@ def setup_dashboard():
     ])
     ws_doc.save(ignore_permissions=True)
     frappe.db.commit()
-    print("Workspace updated with Store Customizer successfully!")
+    print("Workspace updated with Store Customizer & Stock Adjustment successfully!")
 
 if __name__ == "__main__":
     setup_dashboard()

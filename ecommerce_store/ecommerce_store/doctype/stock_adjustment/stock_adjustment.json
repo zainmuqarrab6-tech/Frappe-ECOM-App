@@ -1,0 +1,119 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-10-29 14:29:15.449096",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "sec_overview",
+  "adjustment_date",
+  "reason",
+  "col_overview",
+  "reference_note",
+  "notes",
+  "sec_items",
+  "items",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "default": "STK-ADJ-.YYYY.-.#####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "STK-ADJ-.YYYY.-.#####"
+  },
+  {
+   "fieldname": "sec_overview",
+   "fieldtype": "Section Break",
+   "label": "Adjustment Overview"
+  },
+  {
+   "default": "Today",
+   "fieldname": "adjustment_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "default": "New Supplier Delivery / Restock",
+   "fieldname": "reason",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Reason for Adjustment",
+   "options": "New Supplier Delivery / Restock\nDamaged Goods\nInventory Count Correction\nCustomer Return Restock\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "col_overview",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reference_note",
+   "fieldtype": "Data",
+   "label": "Supplier / Invoice Reference #"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Internal Notes"
+  },
+  {
+   "fieldname": "sec_items",
+   "fieldtype": "Section Break",
+   "label": "Adjusted Products"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Products",
+   "options": "Stock Adjustment Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Stock Adjustment",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-10-29 14:29:15.449096",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Store",
+ "name": "Stock Adjustment",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -7,7 +7,7 @@
    "chart_name": "Daily Sales Trend"
   }
  ],
- "content": "[{\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83d\\udcca Store Performance KPIs</span>\", \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Total Revenue\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Total Orders\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Pending Orders\", \"col\": 2}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Active Products\", \"col\": 2}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Total Customers\", \"col\": 2}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83c\\udfa8 Storefront Design & Customizer (Shopify-Style)</span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Store Customizer\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Hero Banners\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Navigation Menus\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Pages & Policies\", \"col\": 3}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83d\\udcc8 Sales & Orders Analytics</span>\", \"col\": 12}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Daily Sales Trend\", \"col\": 7}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Orders by Status\", \"col\": 5}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\u26a1 Commerce Operations</span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Pending Orders\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"All Orders\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Products\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Low Stock Alerts\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Customers\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Product Reviews\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Discounts & Coupons\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Store Settings\", \"col\": 3}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83d\\udcc2 Store Management Modules</span>\", \"col\": 12}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Storefront Customizer\", \"col\": 3}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Catalog Management\", \"col\": 3}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Sales & Orders\", \"col\": 3}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Customer & Marketing\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83d\\udcca Store Performance KPIs</span>\", \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Total Revenue\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Total Orders\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Pending Orders\", \"col\": 2}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Active Products\", \"col\": 2}}, {\"type\": \"number_card\", \"data\": {\"card_name\": \"Total Customers\", \"col\": 2}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83c\\udfa8 Storefront Design & Customizer (Shopify-Style)</span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Store Customizer\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Hero Banners\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Navigation Menus\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Pages & Policies\", \"col\": 3}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83d\\udcc8 Sales & Orders Analytics</span>\", \"col\": 12}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Daily Sales Trend\", \"col\": 7}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"Orders by Status\", \"col\": 5}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\u26a1 Commerce Operations</span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Pending Orders\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"All Orders\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Products\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Low Stock Alerts\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Inventory Restock\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Customers\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Product Reviews\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Discounts & Coupons\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Store Settings\", \"col\": 3}}, {\"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class='h4 font-weight-bold'>\\ud83d\\udcc2 Store Management Modules</span>\", \"col\": 12}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Storefront Customizer\", \"col\": 3}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Catalog Management\", \"col\": 3}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Sales & Orders\", \"col\": 3}}, {\"type\": \"card\", \"data\": {\"card_name\": \"Customer & Marketing\", \"col\": 3}}]",
  "creation": "2026-10-29 11:52:01.320515",
  "custom_blocks": [],
  "docstatus": 0,
@@ -85,6 +85,16 @@
    "label": "All Products",
    "link_count": 0,
    "link_to": "Product",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Inventory Restock & Adjustments",
+   "link_count": 0,
+   "link_to": "Stock Adjustment",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -190,7 +200,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-10-29 14:06:20.945941",
+ "modified": "2026-10-29 14:32:56.182370",
  "modified_by": "Administrator",
  "module": "Ecommerce Store",
  "name": "Ecommerce Store",
@@ -283,6 +293,15 @@
    "label": "Low Stock Alerts",
    "link_to": "Product",
    "stats_filter": "{\"track_inventory\": 1, \"stock_quantity\": [\"<=\", 5]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Cyan",
+   "doc_view": "",
+   "format": "{} Restocks",
+   "label": "Inventory Restock",
+   "link_to": "Stock Adjustment",
+   "stats_filter": "{}",
    "type": "DocType"
   },
   {
