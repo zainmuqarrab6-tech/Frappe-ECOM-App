@@ -9,150 +9,75 @@
  "field_order": [
   "sec_overview",
   "title",
-  "route_slug",
-  "sku",
-  "barcode",
-  "col_overview",
-  "category",
-  "brand",
-  "is_active",
-  "is_featured",
-  "sec_pricing",
-  "price",
-  "compare_at_price",
-  "cost_price",
-  "col_pricing",
-  "track_inventory",
-  "is_in_stock",
-  "stock_quantity",
-  "low_stock_threshold",
+  "short_description",
+  "description",
   "sec_media",
   "primary_image",
   "images",
+  "sec_pricing",
+  "price",
+  "compare_at_price",
+  "charge_taxes",
+  "col_pricing",
+  "cost_price",
+  "profit",
+  "margin_percent",
+  "sec_inventory",
+  "track_inventory",
+  "continue_selling_out_of_stock",
+  "is_in_stock",
+  "stock_quantity",
+  "low_stock_threshold",
+  "col_inventory",
+  "sku",
+  "barcode",
+  "sec_shipping",
+  "is_physical_product",
+  "col_shipping",
+  "weight",
+  "weight_unit",
   "sec_variants",
+  "has_variants",
+  "options",
+  "variants",
   "attributes",
-  "sec_desc",
-  "short_description",
-  "description"
+  "sec_organization",
+  "status",
+  "is_active",
+  "is_featured",
+  "col_organization",
+  "category",
+  "brand",
+  "product_type",
+  "tags",
+  "sec_seo",
+  "route_slug",
+  "seo_meta_title",
+  "seo_meta_description"
  ],
  "fields": [
   {
    "fieldname": "sec_overview",
    "fieldtype": "Section Break",
-   "label": "Overview"
+   "label": "Title & Description"
   },
   {
    "fieldname": "title",
    "fieldtype": "Data",
    "in_global_search": 1,
    "in_list_view": 1,
-   "label": "Product Title",
+   "label": "Title",
    "reqd": 1
   },
   {
-   "fieldname": "route_slug",
-   "fieldtype": "Data",
-   "label": "URL Slug",
-   "reqd": 1,
-   "unique": 1
+   "fieldname": "short_description",
+   "fieldtype": "Small Text",
+   "label": "Short Summary"
   },
   {
-   "fieldname": "sku",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "SKU",
-   "reqd": 1,
-   "unique": 1
-  },
-  {
-   "fieldname": "barcode",
-   "fieldtype": "Data",
-   "label": "Barcode"
-  },
-  {
-   "fieldname": "col_overview",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "category",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Category",
-   "options": "Product Category"
-  },
-  {
-   "fieldname": "brand",
-   "fieldtype": "Link",
-   "in_standard_filter": 1,
-   "label": "Brand",
-   "options": "Product Brand"
-  },
-  {
-   "default": "1",
-   "fieldname": "is_active",
-   "fieldtype": "Check",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Is Active"
-  },
-  {
-   "default": "0",
-   "fieldname": "is_featured",
-   "fieldtype": "Check",
-   "in_standard_filter": 1,
-   "label": "Is Featured"
-  },
-  {
-   "fieldname": "sec_pricing",
-   "fieldtype": "Section Break",
-   "label": "Pricing & Inventory"
-  },
-  {
-   "fieldname": "price",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Price",
-   "reqd": 1
-  },
-  {
-   "fieldname": "compare_at_price",
-   "fieldtype": "Currency",
-   "label": "Compare-at Price (Original)"
-  },
-  {
-   "fieldname": "cost_price",
-   "fieldtype": "Currency",
-   "label": "Cost Price"
-  },
-  {
-   "fieldname": "col_pricing",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "1",
-   "fieldname": "track_inventory",
-   "fieldtype": "Check",
-   "label": "Track Inventory"
-  },
-  {
-   "default": "1",
-   "fieldname": "is_in_stock",
-   "fieldtype": "Check",
-   "in_list_view": 1,
-   "label": "In Stock"
-  },
-  {
-   "default": "10",
-   "fieldname": "stock_quantity",
-   "fieldtype": "Int",
-   "label": "Stock Quantity"
-  },
-  {
-   "default": "3",
-   "fieldname": "low_stock_threshold",
-   "fieldtype": "Int",
-   "label": "Low Stock Threshold"
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
   },
   {
    "fieldname": "sec_media",
@@ -171,37 +96,248 @@
    "options": "Product Image Item"
   },
   {
+   "fieldname": "sec_pricing",
+   "fieldtype": "Section Break",
+   "label": "Pricing"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Price",
+   "reqd": 1
+  },
+  {
+   "fieldname": "compare_at_price",
+   "fieldtype": "Currency",
+   "label": "Compare-at Price"
+  },
+  {
+   "default": "1",
+   "fieldname": "charge_taxes",
+   "fieldtype": "Check",
+   "label": "Charge tax on this product"
+  },
+  {
+   "fieldname": "col_pricing",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cost_price",
+   "fieldtype": "Currency",
+   "label": "Cost per item"
+  },
+  {
+   "fieldname": "profit",
+   "fieldtype": "Currency",
+   "label": "Profit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "margin_percent",
+   "fieldtype": "Percent",
+   "label": "Margin",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sec_inventory",
+   "fieldtype": "Section Break",
+   "label": "Inventory"
+  },
+  {
+   "default": "1",
+   "fieldname": "track_inventory",
+   "fieldtype": "Check",
+   "label": "Track quantity"
+  },
+  {
+   "default": "0",
+   "fieldname": "continue_selling_out_of_stock",
+   "fieldtype": "Check",
+   "label": "Continue selling when out of stock"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_in_stock",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "In Stock"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.has_variants == 0",
+   "fieldname": "stock_quantity",
+   "fieldtype": "Int",
+   "label": "Available Quantity"
+  },
+  {
+   "default": "3",
+   "fieldname": "low_stock_threshold",
+   "fieldtype": "Int",
+   "label": "Low Stock Threshold"
+  },
+  {
+   "fieldname": "col_inventory",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sku",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "SKU (Stock Keeping Unit)"
+  },
+  {
+   "fieldname": "barcode",
+   "fieldtype": "Data",
+   "label": "Barcode (ISBN, UPC, GTIN, etc.)"
+  },
+  {
+   "fieldname": "sec_shipping",
+   "fieldtype": "Section Break",
+   "label": "Shipping"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_physical_product",
+   "fieldtype": "Check",
+   "label": "This is a physical product"
+  },
+  {
+   "fieldname": "col_shipping",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.is_physical_product == 1",
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "label": "Weight"
+  },
+  {
+   "default": "kg",
+   "depends_on": "eval:doc.is_physical_product == 1",
+   "fieldname": "weight_unit",
+   "fieldtype": "Select",
+   "label": "Weight Unit",
+   "options": "kg\ng\nlb\noz"
+  },
+  {
    "fieldname": "sec_variants",
    "fieldtype": "Section Break",
-   "label": "Attributes"
+   "label": "Variants"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_variants",
+   "fieldtype": "Check",
+   "label": "This product has options, like size or color"
+  },
+  {
+   "depends_on": "eval:doc.has_variants == 1",
+   "fieldname": "options",
+   "fieldtype": "Table",
+   "label": "Options (e.g. Size, Color)",
+   "options": "Product Option"
+  },
+  {
+   "depends_on": "eval:doc.has_variants == 1",
+   "fieldname": "variants",
+   "fieldtype": "Table",
+   "label": "Generated Variants",
+   "options": "Product Variant"
   },
   {
    "fieldname": "attributes",
    "fieldtype": "Table",
-   "label": "Attributes & Options",
+   "hidden": 1,
+   "label": "Legacy Attributes",
    "options": "Product Attribute Option"
   },
   {
-   "fieldname": "sec_desc",
+   "fieldname": "sec_organization",
    "fieldtype": "Section Break",
-   "label": "Descriptions"
+   "label": "Product Organization & Status"
   },
   {
-   "fieldname": "short_description",
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Active\nDraft\nArchived",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Is Active"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_featured",
+   "fieldtype": "Check",
+   "in_standard_filter": 1,
+   "label": "Featured on Homepage"
+  },
+  {
+   "fieldname": "col_organization",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Category",
+   "options": "Product Category"
+  },
+  {
+   "fieldname": "brand",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Vendor / Brand",
+   "options": "Product Brand"
+  },
+  {
+   "fieldname": "product_type",
+   "fieldtype": "Data",
+   "label": "Product Type"
+  },
+  {
+   "fieldname": "tags",
    "fieldtype": "Small Text",
-   "label": "Short Summary"
+   "label": "Tags (comma-separated, e.g. cotton, summer, unisex)"
   },
   {
-   "fieldname": "description",
-   "fieldtype": "Text Editor",
-   "label": "Detailed Description"
+   "fieldname": "sec_seo",
+   "fieldtype": "Section Break",
+   "label": "Search Engine Listing (SEO)"
+  },
+  {
+   "fieldname": "route_slug",
+   "fieldtype": "Data",
+   "label": "URL Handle / Slug",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "seo_meta_title",
+   "fieldtype": "Data",
+   "label": "Page Title"
+  },
+  {
+   "fieldname": "seo_meta_description",
+   "fieldtype": "Small Text",
+   "label": "Meta Description"
   }
  ],
  "grid_page_length": 50,
  "image_field": "primary_image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-10-29 11:49:57.525645",
+ "modified": "2026-11-17 15:20:00.000000",
  "modified_by": "Administrator",
  "module": "Ecommerce Store",
  "name": "Product",
@@ -234,7 +370,7 @@
  ],
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
- "search_fields": "sku,title,category,brand",
+ "search_fields": "sku,title,category,brand,tags",
  "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",

@@ -1,0 +1,138 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-11-17 15:20:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "sku",
+  "price",
+  "compare_at_price",
+  "cost_price",
+  "stock_quantity",
+  "image",
+  "barcode",
+  "weight",
+  "is_active",
+  "option1_name",
+  "option1_value",
+  "option2_name",
+  "option2_value",
+  "option3_name",
+  "option3_value"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Variant (e.g. Small / Red)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sku",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "SKU"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Price",
+   "reqd": 1
+  },
+  {
+   "fieldname": "compare_at_price",
+   "fieldtype": "Currency",
+   "label": "Compare-at Price"
+  },
+  {
+   "fieldname": "cost_price",
+   "fieldtype": "Currency",
+   "label": "Cost per item"
+  },
+  {
+   "default": "0",
+   "fieldname": "stock_quantity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Available Quantity"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Variant Image"
+  },
+  {
+   "fieldname": "barcode",
+   "fieldtype": "Data",
+   "label": "Barcode"
+  },
+  {
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "label": "Weight"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Active"
+  },
+  {
+   "fieldname": "option1_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Option 1 Name"
+  },
+  {
+   "fieldname": "option1_value",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Option 1 Value"
+  },
+  {
+   "fieldname": "option2_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Option 2 Name"
+  },
+  {
+   "fieldname": "option2_value",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Option 2 Value"
+  },
+  {
+   "fieldname": "option3_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Option 3 Name"
+  },
+  {
+   "fieldname": "option3_value",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Option 3 Value"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-11-17 15:20:00.000000",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Store",
+ "name": "Product Variant",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

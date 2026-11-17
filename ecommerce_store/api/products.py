@@ -2,9 +2,9 @@ import frappe
 from frappe import _
 
 @frappe.whitelist(allow_guest=True)
-def get_products(category=None, brand=None, search=None, sort_by="recent", min_price=None, max_price=None, is_featured=None, page=1, limit=20):
+def get_products(category=None, brand=None, tag=None, search=None, sort_by="recent", min_price=None, max_price=None, is_featured=None, page=1, limit=20):
     """
-    Returns filtered and paginated list of active products for frontend store.
+    Returns filtered and paginated list of active products for storefront.
     """
     try:
         page = int(page)
@@ -19,6 +19,8 @@ def get_products(category=None, brand=None, search=None, sort_by="recent", min_p
             filters["category"] = category
         if brand:
             filters["brand"] = brand
+        if tag:
+            filters["tags"] = ["like", f"%{tag}%"]
         if min_price:
             filters["price"] = [">=", float(min_price)]
         if max_price:
@@ -33,6 +35,7 @@ def get_products(category=None, brand=None, search=None, sort_by="recent", min_p
             or_filters = [
                 ["title", "like", search_pattern],
                 ["sku", "like", search_pattern],
+                ["tags", "like", search_pattern],
                 ["short_description", "like", search_pattern]
             ]
             
@@ -48,7 +51,7 @@ def get_products(category=None, brand=None, search=None, sort_by="recent", min_p
         fields = [
             "name", "title", "route_slug", "sku", "category", "brand", 
             "price", "compare_at_price", "is_in_stock", "stock_quantity", 
-            "primary_image", "short_description", "is_featured"
+            "primary_image", "short_description", "is_featured", "has_variants", "tags"
         ]
         
         products = frappe.get_all(
@@ -71,12 +74,15 @@ def get_products(category=None, brand=None, search=None, sort_by="recent", min_p
         else:
             total_count = frappe.db.count("Product", filters=filters)
         
-        # Attach full image URLs if needed
+        # Attach full image URLs and tags array
         for p in products:
             if p.get("primary_image"):
                 p["primary_image_url"] = frappe.utils.get_url(p["primary_image"])
             else:
                 p["primary_image_url"] = None
+                
+            raw_tags = p.get("tags") or ""
+            p["tags_list"] = [t.strip() for t in raw_tags.split(",") if t.strip()]
                 
         return {
             "status": "success",
@@ -95,7 +101,7 @@ def get_products(category=None, brand=None, search=None, sort_by="recent", min_p
 @frappe.whitelist(allow_guest=True)
 def get_product_detail(slug_or_id):
     """
-    Returns full product details, gallery images, and attributes by slug or name/ID.
+    Returns full product details, gallery images, Shopify options, and variants.
     """
     try:
         product_name = None
@@ -118,7 +124,7 @@ def get_product_detail(slug_or_id):
                 "is_primary": 1
             })
             
-        for img in doc.images:
+        for img in (doc.images or []):
             images.append({
                 "image": img.image,
                 "url": frappe.utils.get_url(img.image),
@@ -126,32 +132,83 @@ def get_product_detail(slug_or_id):
                 "is_primary": img.is_primary
             })
             
+        # Shopify Options
+        options = []
+        for opt in (doc.options or []):
+            raw_vals = opt.option_values or ""
+            options.append({
+                "name": opt.option_name,
+                "values": [v.strip() for v in raw_vals.split(",") if v.strip()]
+            })
+            
+        # Shopify Variants
+        variants = []
+        for v in (doc.variants or []):
+            if not getattr(v, "is_active", 1):
+                continue
+            variants.append({
+                "id": v.name,
+                "title": v.title,
+                "sku": v.sku,
+                "price": v.price,
+                "compare_at_price": v.compare_at_price,
+                "stock_quantity": v.stock_quantity,
+                "image": frappe.utils.get_url(v.image) if v.image else None,
+                "barcode": v.barcode,
+                "weight": v.weight,
+                "options": {
+                    "option1": {"name": v.option1_name, "value": v.option1_value} if v.option1_name else None,
+                    "option2": {"name": v.option2_name, "value": v.option2_value} if v.option2_name else None,
+                    "option3": {"name": v.option3_name, "value": v.option3_value} if v.option3_name else None,
+                }
+            })
+            
+        # Legacy attributes support
         attributes = []
-        for attr in doc.attributes:
+        for attr in (doc.attributes or []):
             attributes.append({
                 "attribute_name": attr.attribute_name,
                 "attribute_value": attr.attribute_value
             })
             
+        raw_tags = doc.tags or ""
+        tags_list = [t.strip() for t in raw_tags.split(",") if t.strip()]
+
         product_data = {
             "id": doc.name,
             "title": doc.title,
+            "status": doc.status or "Active",
             "route_slug": doc.route_slug,
             "sku": doc.sku,
             "barcode": doc.barcode,
             "category": doc.category,
             "brand": doc.brand,
+            "product_type": doc.product_type,
+            "tags": tags_list,
             "price": doc.price,
             "compare_at_price": doc.compare_at_price,
+            "charge_taxes": doc.charge_taxes,
             "is_in_stock": doc.is_in_stock,
             "stock_quantity": doc.stock_quantity if doc.track_inventory else 999,
+            "track_inventory": doc.track_inventory,
+            "continue_selling_out_of_stock": doc.continue_selling_out_of_stock,
+            "is_physical_product": doc.is_physical_product,
+            "weight": doc.weight,
+            "weight_unit": doc.weight_unit or "kg",
+            "has_variants": doc.has_variants,
+            "options": options,
+            "variants": variants,
+            "attributes": attributes,
             "primary_image": doc.primary_image,
             "primary_image_url": frappe.utils.get_url(doc.primary_image) if doc.primary_image else None,
             "images": images,
-            "attributes": attributes,
             "short_description": doc.short_description,
             "description": doc.description,
-            "is_featured": doc.is_featured
+            "is_featured": doc.is_featured,
+            "seo": {
+                "title": doc.seo_meta_title or doc.title,
+                "description": doc.seo_meta_description or doc.short_description or ""
+            }
         }
         
         return {"status": "success", "data": product_data}
