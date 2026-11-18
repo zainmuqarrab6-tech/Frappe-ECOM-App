@@ -11,15 +11,14 @@ app_license = "mit"
 # required_apps = []
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "ecommerce_store",
-# 		"logo": "/assets/ecommerce_store/logo.png",
-# 		"title": "Ecommerce Store",
-# 		"route": "/ecommerce_store",
-# 		"has_permission": "ecommerce_store.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "ecommerce_store",
+		"logo": "/assets/frappe/images/frappe-framework-logo.svg",
+		"title": "Ecommerce Store",
+		"route": "/desk/ecommerce-store",
+	}
+]
 
 # Includes in <head>
 # ------------------

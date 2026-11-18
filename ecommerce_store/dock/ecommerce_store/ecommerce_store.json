@@ -1,0 +1,23 @@
+{
+ "app": "ecommerce_store",
+ "creation": "2026-11-18 10:37:37.060675",
+ "docstatus": 0,
+ "doctype": "Dock",
+ "idx": 0,
+ "items": [
+  {
+   "added": 0,
+   "hidden": 0,
+   "icon": "shopping-bag",
+   "link_to": "Ecommerce Store",
+   "link_type": "Sidebar",
+   "title": "Ecommerce Store"
+  }
+ ],
+ "modified": "2026-11-18 10:37:37.060675",
+ "modified_by": "Administrator",
+ "name": "ecommerce_store",
+ "owner": "Administrator",
+ "standard": 1,
+ "user": ""
+}
