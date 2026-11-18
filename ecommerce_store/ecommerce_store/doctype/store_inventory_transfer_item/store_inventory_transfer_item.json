@@ -1,0 +1,64 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "creation": "2026-11-18 12:59:56.900300",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "product",
+  "sku",
+  "quantity_to_transfer",
+  "quantity_received"
+ ],
+ "fields": [
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Product",
+   "options": "Product",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "product.sku",
+   "fieldname": "sku",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "SKU",
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "quantity_to_transfer",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Qty to Transfer",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "quantity_received",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Qty Received"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "link_display_mode": "Search",
+ "links": [],
+ "modified": "2026-11-18 12:59:56.900300",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Store",
+ "name": "Store Inventory Transfer Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,161 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "TRF-.YYYY.-.#####",
+ "creation": "2026-11-18 12:59:56.978578",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "sec_overview",
+  "origin_location",
+  "destination_location",
+  "col_1",
+  "status",
+  "transfer_date",
+  "expected_arrival",
+  "sec_logistics",
+  "carrier",
+  "tracking_number",
+  "col_2",
+  "notes",
+  "sec_items",
+  "items",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "default": "TRF-.YYYY.-.#####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "TRF-.YYYY.-.#####"
+  },
+  {
+   "fieldname": "sec_overview",
+   "fieldtype": "Section Break",
+   "label": "Transfer Route & Schedule"
+  },
+  {
+   "default": "Main Fulfillment Center",
+   "fieldname": "origin_location",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Origin Location",
+   "reqd": 1
+  },
+  {
+   "default": "Retail Outlet 1",
+   "fieldname": "destination_location",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Destination Location",
+   "reqd": 1
+  },
+  {
+   "fieldname": "col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nIn Transit\nPartially Received\nCompleted\nCancelled"
+  },
+  {
+   "default": "Today",
+   "fieldname": "transfer_date",
+   "fieldtype": "Date",
+   "label": "Transfer Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "expected_arrival",
+   "fieldtype": "Date",
+   "label": "Expected Arrival Date"
+  },
+  {
+   "fieldname": "sec_logistics",
+   "fieldtype": "Section Break",
+   "label": "Logistics & Tracking"
+  },
+  {
+   "fieldname": "carrier",
+   "fieldtype": "Data",
+   "label": "Shipping Carrier / Fleet"
+  },
+  {
+   "fieldname": "tracking_number",
+   "fieldtype": "Data",
+   "label": "Tracking Number"
+  },
+  {
+   "fieldname": "col_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Transfer Notes"
+  },
+  {
+   "fieldname": "sec_items",
+   "fieldtype": "Section Break",
+   "label": "Transferred Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Products to Transfer",
+   "options": "Store Inventory Transfer Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Store Inventory Transfer",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "link_display_mode": "Search",
+ "links": [],
+ "modified": "2026-11-18 12:59:56.978578",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Store",
+ "name": "Store Inventory Transfer",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "show_name_in_global_search": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

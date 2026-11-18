@@ -1,0 +1,193 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "PO-.YYYY.-.#####",
+ "creation": "2026-11-18 12:59:56.749581",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "sec_overview",
+  "supplier_name",
+  "order_date",
+  "col_1",
+  "status",
+  "expected_arrival",
+  "sec_shipping",
+  "destination_location",
+  "payment_terms",
+  "col_2",
+  "tracking_number",
+  "shipping_carrier",
+  "sec_items",
+  "items",
+  "sec_totals",
+  "total_quantity",
+  "total_cost",
+  "col_3",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "default": "PO-.YYYY.-.#####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "PO-.YYYY.-.#####"
+  },
+  {
+   "fieldname": "sec_overview",
+   "fieldtype": "Section Break",
+   "label": "Purchase Order Details"
+  },
+  {
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Supplier / Vendor Name",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "order_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Order Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nOrdered\nPartially Received\nReceived\nCancelled"
+  },
+  {
+   "fieldname": "expected_arrival",
+   "fieldtype": "Date",
+   "label": "Expected Arrival Date"
+  },
+  {
+   "fieldname": "sec_shipping",
+   "fieldtype": "Section Break",
+   "label": "Destination & Payment"
+  },
+  {
+   "default": "Main Distribution Center",
+   "fieldname": "destination_location",
+   "fieldtype": "Data",
+   "label": "Receiving Location / Warehouse"
+  },
+  {
+   "default": "Payment on Delivery",
+   "fieldname": "payment_terms",
+   "fieldtype": "Select",
+   "label": "Payment Terms",
+   "options": "Payment on Delivery\nNet 15\nNet 30\nNet 60\nPrepaid"
+  },
+  {
+   "fieldname": "col_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tracking_number",
+   "fieldtype": "Data",
+   "label": "Tracking Number"
+  },
+  {
+   "fieldname": "shipping_carrier",
+   "fieldtype": "Data",
+   "label": "Shipping Carrier"
+  },
+  {
+   "fieldname": "sec_items",
+   "fieldtype": "Section Break",
+   "label": "Products Ordered"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Products",
+   "options": "Store Purchase Order Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sec_totals",
+   "fieldtype": "Section Break",
+   "label": "Totals & Notes"
+  },
+  {
+   "fieldname": "total_quantity",
+   "fieldtype": "Int",
+   "label": "Total Quantity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "col_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Supplier Notes / Instructions"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Store Purchase Order",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "link_display_mode": "Search",
+ "links": [],
+ "modified": "2026-11-18 12:59:56.749581",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Store",
+ "name": "Store Purchase Order",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "show_name_in_global_search": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
