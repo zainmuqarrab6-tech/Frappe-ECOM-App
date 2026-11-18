@@ -1,5 +1,5 @@
 // Copyright (c) 2026, Zain and contributors
-// Shopify-style Left Sidebar Hierarchy and Sub-menus
+// Shopify-style Left Sidebar Hierarchy and Clean Navigation
 
 (function () {
 	let isNestingSubmenu = false;
@@ -12,26 +12,40 @@
 		{ name: "Gift cards", route: "store-gift-card" }
 	];
 
+	function findSidebarItem(label) {
+		let $el = $(`.body-sidebar .sidebar-items .sidebar-item-container[item-name="${label}"]`);
+		if ($el.length) return $el;
+		$el = $(`.body-sidebar .sidebar-items .sidebar-item-container[data-id="${label}"]`);
+		if ($el.length) return $el;
+		$(`.body-sidebar .sidebar-items .sidebar-item-container`).each(function () {
+			if ($(this).find(".sidebar-item-label").first().text().trim() === label) {
+				$el = $(this);
+				return false;
+			}
+		});
+		return $el;
+	}
+
 	function setupShopifyProductSubmenu() {
 		if (isNestingSubmenu) return;
 		const $sidebar = $(".body-sidebar .sidebar-items");
 		if (!$sidebar.length) return;
 
-		const $productItem = $sidebar.find('.sidebar-item-container[item-name="Products"]');
-		if (!$productItem.length) return;
+		const $productItem = findSidebarItem("Products");
+		if (!$productItem || !$productItem.length) return;
 
 		isNestingSubmenu = true;
 
-		// 1. Ensure nested sub-container exists inside Products item
-		let $nested = $productItem.find('> .shopify-product-subitems');
+		// 1. Ensure sub-container exists inside Products item
+		let $nested = $productItem.find("> .shopify-product-subitems");
 		if (!$nested.length) {
 			$nested = $('<div class="sidebar-child-item nested-container shopify-product-subitems"></div>');
 			$productItem.append($nested);
 		}
 
 		// 2. Add chevron toggle button to Products item if not already present
-		const $anchor = $productItem.find('> .standard-sidebar-item > .item-anchor');
-		if ($anchor.length && !$productItem.find('.shopify-product-chevron').length) {
+		const $anchor = $productItem.find("> .standard-sidebar-item > .item-anchor");
+		if ($anchor.length && !$productItem.find(".shopify-product-chevron").length) {
 			const $chevron = $(`
 				<button type="button" class="btn-reset shopify-product-chevron" title="Toggle sub-options" aria-label="Toggle sub-options">
 					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -52,8 +66,8 @@
 
 		// 3. Move each sub-item physically inside the Products nested container
 		SUB_ITEMS.forEach(sub => {
-			const $subItem = $sidebar.find(`.sidebar-item-container[item-name="${sub.name}"]`);
-			if ($subItem.length && !$nested.has($subItem).length) {
+			const $subItem = findSidebarItem(sub.name);
+			if ($subItem && $subItem.length && !$nested.has($subItem).length) {
 				$nested.append($subItem);
 			}
 		});
@@ -67,7 +81,7 @@
 		let isAnySubActive = false;
 
 		SUB_ITEMS.forEach(sub => {
-			const $subItem = $nested.find(`.sidebar-item-container[item-name="${sub.name}"]`);
+			const $subItem = $nested.find(`.sidebar-item-container[item-name="${sub.name}"], .sidebar-item-container[data-id="${sub.name}"]`);
 			const isThisSubActive = fullRoute.includes(sub.route) || fullRoute.includes(sub.name.toLowerCase().replace(/ /g, "-"));
 			if (isThisSubActive) {
 				isAnySubActive = true;
@@ -77,26 +91,25 @@
 			}
 		});
 
-		const $chevron = $productItem.find(".shopify-product-chevron");
-		if (isProductActive || isAnySubActive) {
-			// Expand submenu when on any product or sub-option page
-			$nested.removeClass("collapsed");
-			$chevron.removeClass("collapsed");
-			if (!isAnySubActive && isProductActive) {
-				$productItem.addClass("shopify-parent-active");
-			} else {
-				$productItem.removeClass("shopify-parent-active");
-			}
+		// Active styling for Products parent pill
+		if (isProductActive && !isAnySubActive) {
+			$productItem.addClass("shopify-parent-active");
+		} else {
+			$productItem.removeClass("shopify-parent-active");
 		}
 
 		isNestingSubmenu = false;
 	}
 
 	function pinSettingsAtEnd() {
-		// 1. Sidebar: Ensure Settings item is placed at the very end of .sidebar-items
+		// Clean up any stray dock gear buttons so there is only ONE settings button
+		$("#desk-dock .dock-item-settings-bottom").remove();
+		$("#desk-dock .dock-item[title='Settings']").remove();
+
+		// Keep single Settings link at the very end of sidebar-items
 		const $sidebarItems = $(".body-sidebar .sidebar-items");
-		const $settingsItem = $sidebarItems.find('.sidebar-item-container[item-name="Settings"]');
-		if ($settingsItem.length) {
+		const $settingsItem = findSidebarItem("Settings");
+		if ($settingsItem && $settingsItem.length) {
 			$sidebarItems.append($settingsItem);
 			$settingsItem.css({
 				"margin-top": "auto",
@@ -104,33 +117,6 @@
 				"border-top": "1px solid var(--outline-gray-1, rgba(255, 255, 255, 0.08))",
 				"margin-bottom": "6px"
 			});
-		}
-
-		// 2. Dock: Ensure Settings gear button is at the end of the dock icons (above user avatar)
-		const $dock = $("#desk-dock");
-		if ($dock.length && !$dock.find(".dock-item-settings-bottom").length) {
-			const $user = $dock.find(".dock-user");
-			const $dockSettings = $(`
-				<button class="dock-item dock-item-settings-bottom" aria-label="Settings" title="Settings">
-					<span class="dock-item-icon">
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="12" cy="12" r="3"></circle>
-							<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-						</svg>
-					</span>
-					<span class="dock-item-label">Settings</span>
-				</button>
-			`);
-
-			$dockSettings.on("click", function () {
-				frappe.set_route("Form", "Store Settings");
-			});
-
-			if ($user.length) {
-				$dockSettings.insertBefore($user);
-			} else {
-				$dock.append($dockSettings);
-			}
 		}
 	}
 
@@ -140,27 +126,27 @@
 	}
 
 	$(document).ready(function () {
-		setTimeout(runAllSidebarEnhancements, 200);
-		setTimeout(runAllSidebarEnhancements, 800);
-		setTimeout(runAllSidebarEnhancements, 1800);
+		setTimeout(runAllSidebarEnhancements, 100);
+		setTimeout(runAllSidebarEnhancements, 400);
+		setTimeout(runAllSidebarEnhancements, 1000);
 	});
 
 	$(document).on("sidebar_setup", function () {
-		setTimeout(runAllSidebarEnhancements, 100);
+		setTimeout(runAllSidebarEnhancements, 50);
 	});
 
 	if (window.frappe && frappe.router) {
 		frappe.router.on("change", function () {
-			setTimeout(runAllSidebarEnhancements, 150);
+			setTimeout(runAllSidebarEnhancements, 80);
 		});
 	}
 
-	// Observe sidebar mutations so any dynamic re-rendering automatically nests sub-items
+	// Observer on .sidebar-items
 	const observer = new MutationObserver(function (mutations) {
 		if (isNestingSubmenu) return;
 		for (const m of mutations) {
 			if (m.addedNodes.length > 0) {
-				setTimeout(runAllSidebarEnhancements, 50);
+				setTimeout(runAllSidebarEnhancements, 40);
 				break;
 			}
 		}
@@ -171,7 +157,7 @@
 		if (target) {
 			observer.observe(target, { childList: true });
 		} else {
-			setTimeout(attachObserver, 500);
+			setTimeout(attachObserver, 400);
 		}
 	}
 	attachObserver();
