@@ -162,7 +162,7 @@
    "label": "Sales channels",
    "link_type": "DocType",
    "open_in_new_tab": 1,
-   "show_arrow": 1,
+   "show_arrow": 0,
    "type": "Section Break"
   },
   {
@@ -176,6 +176,22 @@
    "keep_closed": 0,
    "label": "Online Store",
    "link_to": "Store Theme Settings",
+   "link_type": "DocType",
+   "open_in_new_tab": 1,
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "added": 0,
+   "child": 1,
+   "collapsible": 1,
+   "hidden": 0,
+   "icon": "layout-template",
+   "indent": 0,
+   "is_default_module": 0,
+   "keep_closed": 0,
+   "label": "Templates Library",
+   "link_to": "Store Theme",
    "link_type": "DocType",
    "open_in_new_tab": 1,
    "show_arrow": 0,
@@ -278,7 +294,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-11-18 11:12:53.264753",
+ "modified": "2026-11-18 11:33:51.591895",
  "modified_by": "Administrator",
  "module": "Ecommerce Store",
  "name": "Ecommerce Store",

@@ -5,13 +5,20 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "sec_theme_library",
+  "theme_library_html",
+  "col_active_theme",
+  "active_theme",
+  "active_theme_name",
   "sec_brand",
   "store_logo",
   "favicon",
+  "col_brand_text",
   "store_tagline",
   "sec_announcement",
   "enable_announcement_bar",
   "announcement_text",
+  "col_announcement_meta",
   "announcement_link",
   "announcement_bg_color",
   "announcement_text_color",
@@ -19,16 +26,56 @@
   "primary_color",
   "secondary_color",
   "accent_color",
-  "font_family",
+  "bg_color",
+  "text_color",
+  "col_theme_typography",
+  "font_heading",
+  "font_body",
+  "sec_layout_styles",
+  "header_style",
+  "hero_banner_style",
+  "col_layout_comp",
+  "product_card_style",
+  "cart_type",
+  "footer_style",
   "sec_footer",
   "footer_about_text",
   "social_whatsapp",
+  "col_social_meta",
   "social_facebook",
   "social_instagram",
   "social_tiktok",
-  "copyright_text"
+  "copyright_text",
+  "sec_custom_code",
+  "custom_css"
  ],
  "fields": [
+  {
+   "fieldname": "sec_theme_library",
+   "fieldtype": "Section Break",
+   "label": "Online Store Themes & Templates"
+  },
+  {
+   "fieldname": "theme_library_html",
+   "fieldtype": "HTML",
+   "label": "Themes Dashboard"
+  },
+  {
+   "fieldname": "col_active_theme",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "active_theme",
+   "fieldtype": "Link",
+   "label": "Active Template",
+   "options": "Store Theme"
+  },
+  {
+   "default": "Dawn",
+   "fieldname": "active_theme_name",
+   "fieldtype": "Data",
+   "label": "Active Template Name"
+  },
   {
    "fieldname": "sec_brand",
    "fieldtype": "Section Break",
@@ -43,6 +90,10 @@
    "fieldname": "favicon",
    "fieldtype": "Attach Image",
    "label": "Favicon"
+  },
+  {
+   "fieldname": "col_brand_text",
+   "fieldtype": "Column Break"
   },
   {
    "default": "The Best Products, Delivered Fast",
@@ -68,6 +119,10 @@
    "label": "Announcement Text"
   },
   {
+   "fieldname": "col_announcement_meta",
+   "fieldtype": "Column Break"
+  },
+  {
    "default": "/shop",
    "fieldname": "announcement_link",
    "fieldtype": "Data",
@@ -88,32 +143,99 @@
   {
    "fieldname": "sec_colors",
    "fieldtype": "Section Break",
-   "label": "Theme Colors & Styling"
+   "label": "Theme Colors & Typography"
   },
   {
-   "default": "#0284c7",
+   "default": "#121212",
    "fieldname": "primary_color",
    "fieldtype": "Data",
    "label": "Primary Brand Color (Buttons & Highlights)"
   },
   {
-   "default": "#0f172a",
+   "default": "#f4f4f4",
    "fieldname": "secondary_color",
    "fieldtype": "Data",
-   "label": "Secondary Color (Dark Headers/Footers)"
+   "label": "Secondary Color (Surfaces & Cards)"
   },
   {
-   "default": "#f59e0b",
+   "default": "#000000",
    "fieldname": "accent_color",
    "fieldtype": "Data",
-   "label": "Accent Color (Badges/Sale)"
+   "label": "Accent Color (Badges & Sale)"
+  },
+  {
+   "default": "#ffffff",
+   "fieldname": "bg_color",
+   "fieldtype": "Data",
+   "label": "Store Background Color"
+  },
+  {
+   "default": "#121212",
+   "fieldname": "text_color",
+   "fieldtype": "Data",
+   "label": "Body Text Color"
+  },
+  {
+   "fieldname": "col_theme_typography",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Plus Jakarta Sans",
+   "fieldname": "font_heading",
+   "fieldtype": "Select",
+   "label": "Heading Font",
+   "options": "Plus Jakarta Sans\nInter\nPoppins\nPlayfair Display\nMontserrat\nRoboto"
   },
   {
    "default": "Inter",
-   "fieldname": "font_family",
+   "fieldname": "font_body",
    "fieldtype": "Select",
-   "label": "Primary Font",
-   "options": "Inter\nRoboto\nPoppins\nMontserrat\nOpen Sans"
+   "label": "Body Font",
+   "options": "Inter\nRoboto\nOpen Sans\nLato\nPoppins"
+  },
+  {
+   "fieldname": "sec_layout_styles",
+   "fieldtype": "Section Break",
+   "label": "Layout & Component Styles"
+  },
+  {
+   "default": "Centered Logo",
+   "fieldname": "header_style",
+   "fieldtype": "Select",
+   "label": "Header Style",
+   "options": "Minimal Top Bar\nCentered Logo\nSplit Navigation\nSticky Transparent"
+  },
+  {
+   "default": "Full Width Hero Slider",
+   "fieldname": "hero_banner_style",
+   "fieldtype": "Select",
+   "label": "Hero Banner Style",
+   "options": "Full Width Hero Slider\nSplit Image & Text\nVideo Background\nMinimal Grid"
+  },
+  {
+   "fieldname": "col_layout_comp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Minimal Compact",
+   "fieldname": "product_card_style",
+   "fieldtype": "Select",
+   "label": "Product Card Style",
+   "options": "Standard Borderless\nCard with Shadow\nMinimal Compact\nRounded Modern"
+  },
+  {
+   "default": "Slide-out Drawer Cart",
+   "fieldname": "cart_type",
+   "fieldtype": "Select",
+   "label": "Cart Display Type",
+   "options": "Slide-out Drawer Cart\nPopup Modal Cart\nDirect Page Cart"
+  },
+  {
+   "default": "Multi-column Mega Footer",
+   "fieldname": "footer_style",
+   "fieldtype": "Select",
+   "label": "Footer Style",
+   "options": "Multi-column Mega Footer\nSimple Centered\nMinimalist"
   },
   {
    "fieldname": "sec_footer",
@@ -121,7 +243,7 @@
    "label": "Footer & Social Media Links"
   },
   {
-   "default": "Your trusted destination for premium electronics, fashion, and home goods with nationwide cash on delivery.",
+   "default": "Your trusted destination for premium fashion, tech, and lifestyle goods with nationwide cash on delivery.",
    "fieldname": "footer_about_text",
    "fieldtype": "Small Text",
    "label": "Footer About Us Text"
@@ -131,6 +253,10 @@
    "fieldname": "social_whatsapp",
    "fieldtype": "Data",
    "label": "WhatsApp Support Number"
+  },
+  {
+   "fieldname": "col_social_meta",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "social_facebook",
@@ -148,10 +274,20 @@
    "label": "TikTok URL"
   },
   {
-   "default": "\u00a9 2026 ProStore Ecommerce. All Rights Reserved.",
+   "default": "\u00a9 2026 Frappe ECom. All Rights Reserved.",
    "fieldname": "copyright_text",
    "fieldtype": "Data",
    "label": "Copyright Notice"
+  },
+  {
+   "fieldname": "sec_custom_code",
+   "fieldtype": "Section Break",
+   "label": "Custom CSS Overrides"
+  },
+  {
+   "fieldname": "custom_css",
+   "fieldtype": "Code",
+   "label": "Custom CSS"
   }
  ],
  "grid_page_length": 50,

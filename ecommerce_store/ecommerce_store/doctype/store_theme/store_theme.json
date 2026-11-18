@@ -1,0 +1,234 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:theme_name",
+ "creation": "2026-11-18 11:30:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sec_basic",
+  "theme_name",
+  "version",
+  "category",
+  "is_active",
+  "col_meta",
+  "badge_text",
+  "description",
+  "preview_image",
+  "sec_colors",
+  "primary_color",
+  "secondary_color",
+  "accent_color",
+  "bg_color",
+  "text_color",
+  "col_typography",
+  "font_heading",
+  "font_body",
+  "sec_layout",
+  "header_style",
+  "hero_banner_style",
+  "product_card_style",
+  "col_layout_2",
+  "cart_type",
+  "footer_style",
+  "sec_advanced",
+  "config_json",
+  "custom_css"
+ ],
+ "fields": [
+  {
+   "fieldname": "sec_basic",
+   "fieldtype": "Section Break",
+   "label": "Template Information"
+  },
+  {
+   "fieldname": "theme_name",
+   "fieldtype": "Data",
+   "label": "Template Name",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "default": "1.0.0",
+   "fieldname": "version",
+   "fieldtype": "Data",
+   "label": "Version"
+  },
+  {
+   "default": "Fashion & Apparel",
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "label": "Category / Industry",
+   "options": "Fashion & Apparel\nBeauty & Cosmetics\nElectronics & Tech\nHome & Furniture\nGrocery & Food\nJewelry & Luxury\nGeneral & Multipurpose",
+   "in_list_view": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Active (Published)",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "col_meta",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "badge_text",
+   "fieldtype": "Data",
+   "label": "Badge Label"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "preview_image",
+   "fieldtype": "Attach Image",
+   "label": "Preview Screenshot"
+  },
+  {
+   "fieldname": "sec_colors",
+   "fieldtype": "Section Break",
+   "label": "Theme Colors & Typography"
+  },
+  {
+   "default": "#121212",
+   "fieldname": "primary_color",
+   "fieldtype": "Data",
+   "label": "Primary Brand Color"
+  },
+  {
+   "default": "#f4f4f4",
+   "fieldname": "secondary_color",
+   "fieldtype": "Data",
+   "label": "Secondary Color"
+  },
+  {
+   "default": "#000000",
+   "fieldname": "accent_color",
+   "fieldtype": "Data",
+   "label": "Accent Color"
+  },
+  {
+   "default": "#ffffff",
+   "fieldname": "bg_color",
+   "fieldtype": "Data",
+   "label": "Background Color"
+  },
+  {
+   "default": "#121212",
+   "fieldname": "text_color",
+   "fieldtype": "Data",
+   "label": "Body Text Color"
+  },
+  {
+   "fieldname": "col_typography",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Plus Jakarta Sans",
+   "fieldname": "font_heading",
+   "fieldtype": "Select",
+   "label": "Heading Font",
+   "options": "Plus Jakarta Sans\nInter\nPoppins\nPlayfair Display\nMontserrat\nRoboto"
+  },
+  {
+   "default": "Inter",
+   "fieldname": "font_body",
+   "fieldtype": "Select",
+   "label": "Body Font",
+   "options": "Inter\nRoboto\nOpen Sans\nLato\nPoppins"
+  },
+  {
+   "fieldname": "sec_layout",
+   "fieldtype": "Section Break",
+   "label": "Layout & Component Styles"
+  },
+  {
+   "default": "Centered Logo",
+   "fieldname": "header_style",
+   "fieldtype": "Select",
+   "label": "Header Style",
+   "options": "Minimal Top Bar\nCentered Logo\nSplit Navigation\nSticky Transparent"
+  },
+  {
+   "default": "Full Width Hero Slider",
+   "fieldname": "hero_banner_style",
+   "fieldtype": "Select",
+   "label": "Hero Banner Style",
+   "options": "Full Width Hero Slider\nSplit Image & Text\nVideo Background\nMinimal Grid"
+  },
+  {
+   "default": "Minimal Compact",
+   "fieldname": "product_card_style",
+   "fieldtype": "Select",
+   "label": "Product Card Style",
+   "options": "Standard Borderless\nCard with Shadow\nMinimal Compact\nRounded Modern"
+  },
+  {
+   "fieldname": "col_layout_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Slide-out Drawer Cart",
+   "fieldname": "cart_type",
+   "fieldtype": "Select",
+   "label": "Cart Display Type",
+   "options": "Slide-out Drawer Cart\nPopup Modal Cart\nDirect Page Cart"
+  },
+  {
+   "default": "Multi-column Mega Footer",
+   "fieldname": "footer_style",
+   "fieldtype": "Select",
+   "label": "Footer Style",
+   "options": "Multi-column Mega Footer\nSimple Centered\nMinimalist"
+  },
+  {
+   "fieldname": "sec_advanced",
+   "fieldtype": "Section Break",
+   "label": "Advanced Settings & Code"
+  },
+  {
+   "fieldname": "config_json",
+   "fieldtype": "Code",
+   "label": "Config JSON"
+  },
+  {
+   "fieldname": "custom_css",
+   "fieldtype": "Code",
+   "label": "Custom CSS"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-11-18 11:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Store",
+ "name": "Store Theme",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
