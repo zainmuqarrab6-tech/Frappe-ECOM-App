@@ -72,16 +72,20 @@
 			align-items: center;
 			justify-content: space-between;
 			height: 72px;
-			gap: 20px;
+			gap: 24px;
+			flex-wrap: nowrap;
 		}
 		.store-logo {
-			font-size: 22px;
+			font-size: 20px;
 			font-weight: 800;
 			font-family: var(--font-heading);
 			color: var(--secondary);
-			display: flex;
+			display: inline-flex;
 			align-items: center;
 			gap: 8px;
+			white-space: nowrap;
+			flex-shrink: 0;
+			text-decoration: none;
 		}
 		.store-logo .badge-dot {
 			width: 10px;
@@ -89,18 +93,27 @@
 			border-radius: 50%;
 			background: var(--primary);
 			display: inline-block;
+			flex-shrink: 0;
 		}
 		.nav-menu {
 			display: flex;
 			align-items: center;
-			gap: 24px;
+			gap: 22px;
 			list-style: none;
+			margin: 0;
+			padding: 0;
+			flex-wrap: nowrap;
 		}
 		.nav-item {
-			font-size: 14px;
-			font-weight: 500;
+			font-size: 14.5px;
+			font-weight: 600;
 			color: var(--secondary);
-			transition: color 0.15s;
+			transition: color 0.15s, opacity 0.15s;
+			white-space: nowrap;
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			text-decoration: none;
 		}
 		.nav-item:hover, .nav-item.active { color: var(--primary); }
 		.nav-badge {
@@ -108,15 +121,17 @@
 			color: #fff;
 			font-size: 10px;
 			font-weight: 700;
-			padding: 2px 6px;
+			padding: 2px 7px;
 			border-radius: 10px;
 			margin-left: 4px;
+			line-height: 1;
 		}
 
 		.header-actions {
 			display: flex;
 			align-items: center;
 			gap: 14px;
+			flex-shrink: 0;
 		}
 		.search-box {
 			position: relative;
@@ -675,14 +690,22 @@
 			</a>
 
 			<ul class="nav-menu">
-				<li><a href="/store" class="nav-item active">Home</a></li>
-				<li><a href="#products-section" class="nav-item">Shop Catalog</a></li>
-				{% for cat in categories %}
-				<li><a href="#cat-{{ cat.route_slug }}" class="nav-item">{{ cat.category_name }}</a></li>
-				{% endfor %}
-				{% for m in header_menu_items %}
-				<li><a href="{{ m.url }}" class="nav-item">{{ m.label }}{% if m.badge_text %}<span class="nav-badge">{{ m.badge_text }}</span>{% endif %}</a></li>
-				{% endfor %}
+				{% if header_menu_items and header_menu_items|length > 0 %}
+					{% for m in header_menu_items %}
+					<li>
+						<a href="{{ m.url }}" class="nav-item {% if m.url in ('/store', '/') %}active{% endif %}">
+							{{ m.label }}
+							{% if m.badge_text %}<span class="nav-badge">{{ m.badge_text }}</span>{% endif %}
+						</a>
+					</li>
+					{% endfor %}
+				{% else %}
+					<li><a href="/store" class="nav-item active">Home</a></li>
+					<li><a href="#products-section" class="nav-item">Shop Catalog</a></li>
+					{% for cat in categories %}
+					<li><a href="#cat-{{ cat.route_slug }}" class="nav-item">{{ cat.category_name }}</a></li>
+					{% endfor %}
+				{% endif %}
 			</ul>
 
 			<div class="header-actions">
