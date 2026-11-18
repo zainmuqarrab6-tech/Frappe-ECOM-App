@@ -210,20 +210,20 @@
    "label": "Store Identity"
   },
   {
-   "default": "Ghar Mart",
+   "default": "Frappe ECom",
    "fieldname": "store_name",
    "fieldtype": "Data",
    "label": "Store Name",
    "reqd": 1
   },
   {
-   "default": "mygharmart.store",
+   "default": "frappe-ecom.local",
    "fieldname": "primary_domain",
    "fieldtype": "Data",
    "label": "Primary Domain"
   },
   {
-   "default": "store@mygharmart.store",
+   "default": "store@frappe-ecom.local",
    "fieldname": "store_email",
    "fieldtype": "Data",
    "label": "Support Email",
@@ -317,7 +317,7 @@
    "label": "Primary Payment Method"
   },
   {
-   "default": "billing@mygharmart.store",
+   "default": "billing@frappe-ecom.local",
    "fieldname": "billing_email",
    "fieldtype": "Data",
    "label": "Billing Email",
@@ -346,7 +346,7 @@
    "label": "Billing Address"
   },
   {
-   "default": "Ghar Mart Head Office, Commercial Avenue, Phase 5 DHA, Lahore",
+   "default": "Commercial Avenue, Phase 5 DHA, Lahore",
    "fieldname": "billing_address",
    "fieldtype": "Small Text",
    "label": "Legal Business Address"
@@ -368,7 +368,7 @@
    "label": "Store Owner Name"
   },
   {
-   "default": "zain@mygharmart.store",
+   "default": "zain@frappe-ecom.local",
    "fieldname": "store_owner_email",
    "fieldtype": "Data",
    "label": "Store Owner Email",
@@ -488,7 +488,7 @@
    "options": "Automatically capture payment for orders\nManually capture payment for orders"
   },
   {
-   "default": "Bank: Meezan Bank Ltd\nAccount Title: Ghar Mart Pvt Ltd\nIBAN: PK65MEZN0001234567890123",
+   "default": "Bank: Meezan Bank Ltd\nAccount Title: Frappe ECom Store\nIBAN: PK65MEZN0001234567890123",
    "fieldname": "bank_deposit_instructions",
    "fieldtype": "Small Text",
    "label": "Bank Transfer Instructions"
@@ -738,7 +738,7 @@
    "label": "Default Fulfillment Location"
   },
   {
-   "default": "Ghar Mart Main Fulfillment Hub",
+   "default": "Frappe ECom Fulfillment Hub",
    "fieldname": "primary_location_name",
    "fieldtype": "Data",
    "label": "Location Name"
@@ -925,13 +925,13 @@
    "label": "Domains & SSL"
   },
   {
-   "default": "mygharmart.store",
+   "default": "frappe-ecom.local",
    "fieldname": "custom_domain",
    "fieldtype": "Data",
    "label": "Primary Domain"
   },
   {
-   "default": "gharmart.myshopify.com",
+   "default": "frappe-ecom.local",
    "fieldname": "subdomain",
    "fieldtype": "Data",
    "label": "Default Platform Subdomain"
@@ -1044,7 +1044,7 @@
    "label": "Enable SMS Order Updates"
   },
   {
-   "default": "GHARMART",
+   "default": "ECOM",
    "fieldname": "sms_sender_id",
    "fieldtype": "Data",
    "label": "SMS Sender Header / ID"
@@ -1055,7 +1055,7 @@
    "label": "Staff Order Alerts"
   },
   {
-   "default": "orders@mygharmart.store",
+   "default": "orders@frappe-ecom.local",
    "fieldname": "order_notification_email",
    "fieldtype": "Data",
    "label": "Staff Notification Email"
@@ -1236,7 +1236,7 @@
    "label": "Terms of Service"
   },
   {
-   "default": "By accessing or shopping at Ghar Mart, you agree to these terms and conditions.",
+   "default": "By accessing or shopping at Frappe ECom, you agree to these terms and conditions.",
    "fieldname": "terms_of_service",
    "fieldtype": "Text Editor",
    "label": "Terms of Service Content"
@@ -1258,7 +1258,7 @@
    "label": "Contact Information & Legal Notice"
   },
   {
-   "default": "Ghar Mart Private Limited. Reg No: 0098241. Contact: support@mygharmart.store",
+   "default": "Frappe ECom Store. Contact: support@frappe-ecom.local",
    "fieldname": "legal_notice",
    "fieldtype": "Text Editor",
    "label": "Legal Notice & Business Details"

@@ -4,8 +4,28 @@
 frappe.ui.form.on("Store Settings", {
 	refresh(frm) {
 		setup_shopify_settings_view(frm);
+	},
+	store_name(frm) {
+		update_store_card(frm);
+	},
+	primary_domain(frm) {
+		update_store_card(frm);
+	},
+	custom_domain(frm) {
+		update_store_card(frm);
 	}
 });
+
+function update_store_card(frm) {
+	const site_name = frappe.boot?.sitename || "frappe-ecom.local";
+	const store_name = frm.doc.store_name || "Frappe ECom";
+	const domain = frm.doc.primary_domain || frm.doc.custom_domain || site_name;
+	const initials = store_name.split(" ").filter(Boolean).map(w => w[0]).join("").substring(0, 2).toUpperCase() || "FE";
+
+	$(".shopify-store-badge").text(initials);
+	$(".shopify-store-name").text(store_name);
+	$(".shopify-store-domain").text(domain);
+}
 
 function setup_shopify_settings_view(frm) {
 	// Inject styling for Shopify Settings Layout
@@ -232,7 +252,7 @@ function setup_shopify_settings_view(frm) {
 			{ key: "tab_payments", label: "Payments", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>` },
 			{ key: "tab_checkout", label: "Checkout", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>` },
 			{ key: "tab_customer_accounts", label: "Customer accounts", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>` },
-			{ key: "tab_shipping", label: "Shipping and delivery", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>` },
+			{ key: "tab_shipping", label: "Shipping and delivery", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>` },
 			{ key: "tab_taxes", label: "Taxes and duties", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M16 8l-8 8"></path><circle cx="9" cy="9" r="1.5"></circle><circle cx="15" cy="15" r="1.5"></circle></svg>` },
 			{ key: "tab_locations", label: "Locations", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>` },
 			{ key: "tab_markets", label: "Markets", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>` },
@@ -242,14 +262,15 @@ function setup_shopify_settings_view(frm) {
 			{ key: "tab_customer_events", label: "Customer events", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>` },
 			{ key: "tab_notifications", label: "Notifications", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>` },
 			{ key: "tab_metafields", label: "Metafields and metaobjects", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>` },
-			{ key: "tab_languages", label: "Languages", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>` },
+			{ key: "tab_languages", label: "Languages", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path></svg>` },
 			{ key: "tab_customer_privacy", label: "Customer privacy", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>` },
 			{ key: "tab_policies", label: "Policies", icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>` }
 		];
 
-		const store_name = frm.doc.store_name || "Ghar Mart";
-		const primary_domain = frm.doc.primary_domain || frm.doc.custom_domain || "mygharmart.store";
-		const initials = store_name.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase() || "GM";
+		const site_name = frappe.boot?.sitename || "frappe-ecom.local";
+		const store_name = frm.doc.store_name || "Frappe ECom";
+		const primary_domain = frm.doc.primary_domain || frm.doc.custom_domain || site_name;
+		const initials = store_name.split(" ").filter(Boolean).map(w => w[0]).join("").substring(0, 2).toUpperCase() || "FE";
 
 		const $content = $layout.find(".form-tab-content");
 		const $wrapper = $(`<div class="shopify-settings-wrapper"></div>`);
