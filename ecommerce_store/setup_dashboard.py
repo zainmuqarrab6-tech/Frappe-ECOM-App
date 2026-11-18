@@ -22,7 +22,7 @@ def setup_shopify_dashboard():
       </div>
     </div>
     <div class="store-actions">
-      <a href="/" target="_blank" class="shp-btn shp-btn-outline">🌐 View Storefront ↗</a>
+      <a href="/store" target="_blank" class="shp-btn shp-btn-outline">🌐 View Storefront ↗</a>
       <a href="/app/store-theme-settings" class="shp-btn shp-btn-outline">🎨 Theme Customizer</a>
       <a href="/app/product/new" class="shp-btn shp-btn-primary">+ Add Product</a>
     </div>
