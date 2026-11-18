@@ -1,3 +1,4 @@
+import json
 import frappe
 from frappe import _
 
@@ -79,7 +80,10 @@ def get_store_design():
                 "primary": theme.primary_color or "#0284c7",
                 "secondary": theme.secondary_color or "#0f172a",
                 "accent": theme.accent_color or "#f59e0b",
-                "font_family": theme.font_family or "Inter"
+                "bg_color": theme.bg_color or "#ffffff",
+                "text_color": theme.text_color or "#1e293b",
+                "font_heading": theme.font_heading or "Plus Jakarta Sans",
+                "font_body": theme.font_body or "Inter"
             },
             "footer": {
                 "about_text": theme.footer_about_text or "",
@@ -111,6 +115,73 @@ def get_store_design():
     except Exception as e:
         frappe.log_error("get_store_design error", str(e))
         return {"status": "error", "message": str(e)}
+
+@frappe.whitelist()
+def save_theme_editor_data(data):
+    """
+    Saves theme settings, banners, announcement bar, and layout updates
+    coming directly from the Visual Theme Editor.
+    """
+    if not frappe.has_permission("Store Theme Settings", "write"):
+        frappe.throw("Not permitted", frappe.PermissionError)
+
+    if isinstance(data, str):
+        data = json.loads(data)
+
+    theme = frappe.get_doc("Store Theme Settings")
+    store = frappe.get_doc("Store Settings")
+
+    # Colors
+    if "primary_color" in data and data["primary_color"]: theme.primary_color = data["primary_color"]
+    if "secondary_color" in data and data["secondary_color"]: theme.secondary_color = data["secondary_color"]
+    if "accent_color" in data and data["accent_color"]: theme.accent_color = data["accent_color"]
+    if "bg_color" in data and data["bg_color"]: theme.bg_color = data["bg_color"]
+    if "text_color" in data and data["text_color"]: theme.text_color = data["text_color"]
+
+    # Typography
+    if "font_heading" in data and data["font_heading"]: theme.font_heading = data["font_heading"]
+    if "font_body" in data and data["font_body"]: theme.font_body = data["font_body"]
+
+    # Announcement bar
+    if "enable_announcement_bar" in data: theme.enable_announcement_bar = 1 if data["enable_announcement_bar"] else 0
+    if "announcement_text" in data: theme.announcement_text = data["announcement_text"]
+    if "announcement_link" in data: theme.announcement_link = data["announcement_link"]
+    if "announcement_bg_color" in data and data["announcement_bg_color"]: theme.announcement_bg_color = data["announcement_bg_color"]
+    if "announcement_text_color" in data and data["announcement_text_color"]: theme.announcement_text_color = data["announcement_text_color"]
+
+    # Store branding & Tagline
+    if "store_name" in data and data["store_name"]:
+        store.store_name = data["store_name"]
+        store.save(ignore_permissions=True)
+    if "store_tagline" in data: theme.store_tagline = data["store_tagline"]
+
+    # Footer
+    if "footer_about_text" in data: theme.footer_about_text = data["footer_about_text"]
+    if "social_whatsapp" in data: theme.social_whatsapp = data["social_whatsapp"]
+
+    theme.save(ignore_permissions=True)
+
+    # Hero Banner update
+    if "hero_banner" in data and isinstance(data["hero_banner"], dict):
+        hb = data["hero_banner"]
+        banner_name = hb.get("name")
+        if banner_name and frappe.db.exists("Store Banner", banner_name):
+            b_doc = frappe.get_doc("Store Banner", banner_name)
+        elif frappe.db.exists("Store Banner", {"is_active": 1}):
+            b_doc = frappe.get_doc("Store Banner", {"is_active": 1})
+        else:
+            b_doc = frappe.new_doc("Store Banner")
+            b_doc.is_active = 1
+
+        if "heading" in hb: b_doc.heading = hb["heading"]
+        if "subheading" in hb: b_doc.subheading = hb["subheading"]
+        if "button_text" in hb: b_doc.button_text = hb["button_text"]
+        if "button_link" in hb: b_doc.button_link = hb["button_link"]
+        if "image" in hb and hb["image"]: b_doc.image = hb["image"]
+        b_doc.save(ignore_permissions=True)
+
+    frappe.db.commit()
+    return {"status": "success", "message": "Theme saved successfully!"}
 
 @frappe.whitelist(allow_guest=True)
 def get_page(slug):

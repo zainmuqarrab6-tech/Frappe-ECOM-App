@@ -3,6 +3,9 @@
 
 frappe.ui.form.on("Store Theme Settings", {
 	refresh(frm) {
+		frm.add_custom_button(__("🎨 Open Live Visual Customizer"), () => {
+			window.open("/theme-editor", "_blank");
+		}).addClass("btn-primary");
 		render_shopify_theme_manager(frm);
 	}
 });
@@ -661,12 +664,9 @@ function render_dashboard_html(frm, $wrapper, themes) {
 		window.open("/", "_blank");
 	});
 
-	// Scroll to customizer button
+	// Live Theme Customizer button (Shopify style visual editor)
 	html.find("#btn-scroll-to-customizer").on("click", function () {
-		const target = $('[data-fieldname="sec_brand"]').length ? $('[data-fieldname="sec_brand"]') : $('[data-fieldname="sec_colors"]');
-		if (target.length) {
-			$('html, body').animate({ scrollTop: target.offset().top - 80 }, 400);
-		}
+		window.open("/theme-editor", "_blank");
 	});
 
 	// Duplicate active button
