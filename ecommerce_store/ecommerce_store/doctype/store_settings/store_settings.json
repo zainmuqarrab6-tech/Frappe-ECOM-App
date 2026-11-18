@@ -5,49 +5,793 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "sec_store",
+  "tab_plan",
+  "sec_store_identity",
   "store_name",
+  "primary_domain",
   "store_email",
+  "col_store_ident",
   "store_phone",
-  "col_store",
-  "currency",
-  "currency_symbol",
+  "store_industry",
+  "store_timezone",
+  "sec_plan_details",
+  "plan_name",
+  "plan_status",
+  "plan_price",
+  "col_plan_meta",
+  "billing_cycle",
+  "plan_renewal_date",
+  "staff_limit",
+  "tab_billing",
+  "sec_billing_methods",
+  "billing_payment_method",
+  "billing_email",
+  "col_billing_curr",
+  "billing_currency",
+  "tax_id",
+  "sec_billing_address",
+  "billing_address",
+  "tab_users",
+  "sec_store_ownership",
+  "store_owner_name",
+  "store_owner_email",
+  "col_user_sec",
+  "require_two_step_auth",
+  "allow_collaborator_requests",
+  "collaborator_request_code",
+  "sec_staff_roles",
+  "staff_roles_info",
+  "tab_payments",
+  "sec_payment_methods",
+  "allow_cod",
+  "cod_label",
+  "allow_online_payment",
+  "col_payment_gw",
+  "payment_gateway",
+  "payment_test_mode",
+  "sec_payment_creds",
+  "gateway_api_key",
+  "gateway_secret_key",
+  "col_pay_creds",
+  "gateway_webhook_secret",
+  "sec_payment_capture",
+  "payment_capture_method",
+  "bank_deposit_instructions",
+  "tab_checkout",
+  "sec_checkout_contact",
+  "checkout_contact_method",
+  "require_phone_at_checkout",
+  "col_checkout_rules",
+  "allow_guest_checkout",
+  "address_autocomplete",
+  "sec_order_id_rules",
   "order_prefix",
-  "sec_checkout",
+  "order_suffix",
+  "col_order_limits",
+  "minimum_order_amount",
+  "auto_archive_orders",
+  "tab_customer_accounts",
+  "sec_cust_acc_prefs",
+  "customer_account_requirement",
+  "customer_account_version",
+  "col_cust_acc_social",
+  "allow_customer_registration",
+  "enable_google_login",
+  "enable_facebook_login",
+  "tab_shipping",
+  "sec_shipping_rates",
   "default_shipping_fee",
   "free_shipping_threshold",
+  "col_shipping_types",
+  "express_shipping_fee",
+  "weight_unit",
+  "shipping_calculation_type",
+  "sec_local_delivery",
+  "enable_local_delivery",
+  "local_delivery_fee",
+  "col_local_pickup",
+  "enable_store_pickup",
+  "pickup_instructions",
+  "tab_taxes",
+  "sec_tax_rates",
   "tax_percentage",
-  "col_checkout",
-  "allow_guest_checkout",
-  "allow_cod",
-  "allow_online_payment"
+  "prices_include_tax",
+  "col_tax_meta",
+  "charge_tax_on_shipping",
+  "tax_registration_number",
+  "tab_locations",
+  "sec_primary_location",
+  "primary_location_name",
+  "location_address_line1",
+  "location_city",
+  "col_location_details",
+  "location_postal_code",
+  "location_phone",
+  "fulfill_online_orders_from_here",
+  "tab_markets",
+  "sec_markets_config",
+  "primary_market_name",
+  "currency",
+  "currency_symbol",
+  "col_multi_currency",
+  "multi_currency_enabled",
+  "auto_currency_by_ip",
+  "target_countries",
+  "tab_apps",
+  "sec_apps_api",
+  "installed_apps_count",
+  "enable_public_store_api",
+  "col_api_tokens",
+  "storefront_access_token",
+  "webhook_notifications_url",
+  "tab_sales_channels",
+  "sec_channels_list",
+  "channel_online_store",
+  "channel_pos",
+  "channel_whatsapp",
+  "col_social_channels",
+  "channel_facebook",
+  "channel_tiktok",
+  "channel_google",
+  "tab_domains",
+  "sec_domains_manage",
+  "custom_domain",
+  "subdomain",
+  "col_ssl_status",
+  "ssl_status",
+  "redirect_all_to_primary",
+  "tab_customer_events",
+  "sec_pixels_tracking",
+  "google_analytics_id",
+  "google_tag_manager_id",
+  "col_pixels_social",
+  "facebook_pixel_id",
+  "tiktok_pixel_id",
+  "sec_custom_tracking_scripts",
+  "custom_head_script",
+  "custom_body_script",
+  "tab_notifications",
+  "sec_customer_email_notifs",
+  "notify_order_confirmation",
+  "notify_order_shipped",
+  "notify_order_cancelled",
+  "col_sms_notifs",
+  "notify_sms_enabled",
+  "sms_sender_id",
+  "sec_staff_alerts",
+  "order_notification_email",
+  "notify_out_of_stock_admin",
+  "tab_metafields",
+  "sec_metafields_definitions",
+  "enable_product_metafields",
+  "enable_variant_metafields",
+  "col_meta_collections",
+  "enable_collection_metafields",
+  "enable_customer_metafields",
+  "sec_metaobjects_schema",
+  "custom_metafields_schema",
+  "tab_languages",
+  "sec_store_languages",
+  "default_language",
+  "enable_rtl_support",
+  "col_lang_support",
+  "supported_languages",
+  "auto_translate_store",
+  "tab_customer_privacy",
+  "sec_cookie_consent",
+  "enable_cookie_banner",
+  "consent_mode_gdpr",
+  "col_data_retention",
+  "data_retention_days",
+  "allow_account_deletion",
+  "sec_cookie_banner_text",
+  "cookie_banner_text",
+  "tab_policies",
+  "sec_refund_policy",
+  "refund_policy",
+  "sec_privacy_policy",
+  "privacy_policy",
+  "sec_terms_service",
+  "terms_of_service",
+  "sec_shipping_policy",
+  "shipping_policy",
+  "sec_legal_notice",
+  "legal_notice"
  ],
  "fields": [
   {
-   "fieldname": "sec_store",
-   "fieldtype": "Section Break",
-   "label": "Store Details"
+   "fieldname": "tab_plan",
+   "fieldtype": "Tab Break",
+   "label": "Plan"
   },
   {
-   "default": "My E-Commerce Store",
+   "fieldname": "sec_store_identity",
+   "fieldtype": "Section Break",
+   "label": "Store Identity"
+  },
+  {
+   "default": "Ghar Mart",
    "fieldname": "store_name",
    "fieldtype": "Data",
-   "label": "Store Name"
+   "label": "Store Name",
+   "reqd": 1
   },
   {
+   "default": "mygharmart.store",
+   "fieldname": "primary_domain",
+   "fieldtype": "Data",
+   "label": "Primary Domain"
+  },
+  {
+   "default": "store@mygharmart.store",
    "fieldname": "store_email",
    "fieldtype": "Data",
    "label": "Support Email",
    "options": "Email"
   },
   {
+   "fieldname": "col_store_ident",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "+92 300 1234567",
    "fieldname": "store_phone",
    "fieldtype": "Data",
    "label": "Store Phone"
   },
   {
-   "fieldname": "col_store",
+   "default": "Retail",
+   "fieldname": "store_industry",
+   "fieldtype": "Select",
+   "label": "Store Industry",
+   "options": "Retail\nFashion & Apparel\nElectronics\nGrocery & Food\nHealth & Beauty\nHome & Furniture\nGeneral Merchandise"
+  },
+  {
+   "default": "Asia/Karachi (GMT+5)",
+   "fieldname": "store_timezone",
+   "fieldtype": "Select",
+   "label": "Store Timezone",
+   "options": "Asia/Karachi (GMT+5)\nUTC\nAmerica/New_York (EST)\nEurope/London (GMT)\nAsia/Dubai (GMT+4)"
+  },
+  {
+   "fieldname": "sec_plan_details",
+   "fieldtype": "Section Break",
+   "label": "Subscription Plan Details"
+  },
+  {
+   "default": "Shopify Standard",
+   "fieldname": "plan_name",
+   "fieldtype": "Select",
+   "label": "Current Plan",
+   "options": "Shopify Basic\nShopify Standard\nAdvanced Shopify\nShopify Plus (Enterprise)"
+  },
+  {
+   "default": "Active",
+   "fieldname": "plan_status",
+   "fieldtype": "Select",
+   "label": "Plan Status",
+   "options": "Active\nTrial\nPaused\nFrozen"
+  },
+  {
+   "default": "$39 / month",
+   "fieldname": "plan_price",
+   "fieldtype": "Data",
+   "label": "Plan Pricing"
+  },
+  {
+   "fieldname": "col_plan_meta",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "Monthly",
+   "fieldname": "billing_cycle",
+   "fieldtype": "Select",
+   "label": "Billing Cycle",
+   "options": "Monthly\nYearly (Save 25%)"
+  },
+  {
+   "fieldname": "plan_renewal_date",
+   "fieldtype": "Date",
+   "label": "Next Renewal Date"
+  },
+  {
+   "default": "5",
+   "fieldname": "staff_limit",
+   "fieldtype": "Int",
+   "label": "Staff Accounts Limit"
+  },
+  {
+   "fieldname": "tab_billing",
+   "fieldtype": "Tab Break",
+   "label": "Billing"
+  },
+  {
+   "fieldname": "sec_billing_methods",
+   "fieldtype": "Section Break",
+   "label": "Payment Methods on File"
+  },
+  {
+   "default": "Visa ending in 4242",
+   "fieldname": "billing_payment_method",
+   "fieldtype": "Data",
+   "label": "Primary Payment Method"
+  },
+  {
+   "default": "billing@mygharmart.store",
+   "fieldname": "billing_email",
+   "fieldtype": "Data",
+   "label": "Billing Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "col_billing_curr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "USD",
+   "fieldname": "billing_currency",
+   "fieldtype": "Select",
+   "label": "Billing Currency",
+   "options": "USD\nPKR\nEUR\nGBP\nAED\nSAR"
+  },
+  {
+   "default": "NTN-8921472-1",
+   "fieldname": "tax_id",
+   "fieldtype": "Data",
+   "label": "Tax ID / NTN / VAT Number"
+  },
+  {
+   "fieldname": "sec_billing_address",
+   "fieldtype": "Section Break",
+   "label": "Billing Address"
+  },
+  {
+   "default": "Ghar Mart Head Office, Commercial Avenue, Phase 5 DHA, Lahore",
+   "fieldname": "billing_address",
+   "fieldtype": "Small Text",
+   "label": "Legal Business Address"
+  },
+  {
+   "fieldname": "tab_users",
+   "fieldtype": "Tab Break",
+   "label": "Users"
+  },
+  {
+   "fieldname": "sec_store_ownership",
+   "fieldtype": "Section Break",
+   "label": "Store Ownership & Security"
+  },
+  {
+   "default": "Zain",
+   "fieldname": "store_owner_name",
+   "fieldtype": "Data",
+   "label": "Store Owner Name"
+  },
+  {
+   "default": "zain@mygharmart.store",
+   "fieldname": "store_owner_email",
+   "fieldtype": "Data",
+   "label": "Store Owner Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "col_user_sec",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "require_two_step_auth",
+   "fieldtype": "Check",
+   "label": "Require Two-Step Authentication for Staff"
+  },
+  {
+   "default": "1",
+   "fieldname": "allow_collaborator_requests",
+   "fieldtype": "Check",
+   "label": "Allow Partner & Collaborator Requests"
+  },
+  {
+   "default": "981245",
+   "fieldname": "collaborator_request_code",
+   "fieldtype": "Data",
+   "label": "Collaborator Request Code"
+  },
+  {
+   "fieldname": "sec_staff_roles",
+   "fieldtype": "Section Break",
+   "label": "Roles & Permissions Overview"
+  },
+  {
+   "fieldname": "staff_roles_info",
+   "fieldtype": "HTML",
+   "label": "Staff Roles Summary"
+  },
+  {
+   "fieldname": "tab_payments",
+   "fieldtype": "Tab Break",
+   "label": "Payments"
+  },
+  {
+   "fieldname": "sec_payment_methods",
+   "fieldtype": "Section Break",
+   "label": "Supported Payment Providers"
+  },
+  {
+   "default": "1",
+   "fieldname": "allow_cod",
+   "fieldtype": "Check",
+   "label": "Enable Cash on Delivery (COD)"
+  },
+  {
+   "default": "Cash on Delivery (COD)",
+   "fieldname": "cod_label",
+   "fieldtype": "Data",
+   "label": "COD Display Label"
+  },
+  {
+   "default": "1",
+   "fieldname": "allow_online_payment",
+   "fieldtype": "Check",
+   "label": "Enable Online Payment Gateway"
+  },
+  {
+   "fieldname": "col_payment_gw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Stripe",
+   "fieldname": "payment_gateway",
+   "fieldtype": "Select",
+   "label": "Payment Provider",
+   "options": "Stripe\nPayPal\nPayFast\nJazzCash\nEasyPaisa\nManual Bank Transfer\nShopify Payments"
+  },
+  {
+   "default": "1",
+   "fieldname": "payment_test_mode",
+   "fieldtype": "Check",
+   "label": "Sandbox / Test Mode"
+  },
+  {
+   "fieldname": "sec_payment_creds",
+   "fieldtype": "Section Break",
+   "label": "API Credentials"
+  },
+  {
+   "fieldname": "gateway_api_key",
+   "fieldtype": "Data",
+   "label": "Gateway Publishable / Client Key"
+  },
+  {
+   "fieldname": "gateway_secret_key",
+   "fieldtype": "Password",
+   "label": "Gateway Secret Key"
+  },
+  {
+   "fieldname": "col_pay_creds",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gateway_webhook_secret",
+   "fieldtype": "Password",
+   "label": "Webhook Signing Secret"
+  },
+  {
+   "fieldname": "sec_payment_capture",
+   "fieldtype": "Section Break",
+   "label": "Payment Capture & Manual Methods"
+  },
+  {
+   "default": "Automatically capture payment for orders",
+   "fieldname": "payment_capture_method",
+   "fieldtype": "Select",
+   "label": "Payment Capture",
+   "options": "Automatically capture payment for orders\nManually capture payment for orders"
+  },
+  {
+   "default": "Bank: Meezan Bank Ltd\nAccount Title: Ghar Mart Pvt Ltd\nIBAN: PK65MEZN0001234567890123",
+   "fieldname": "bank_deposit_instructions",
+   "fieldtype": "Small Text",
+   "label": "Bank Transfer Instructions"
+  },
+  {
+   "fieldname": "tab_checkout",
+   "fieldtype": "Tab Break",
+   "label": "Checkout"
+  },
+  {
+   "fieldname": "sec_checkout_contact",
+   "fieldtype": "Section Break",
+   "label": "Customer Contact Method"
+  },
+  {
+   "default": "Phone number or email",
+   "fieldname": "checkout_contact_method",
+   "fieldtype": "Select",
+   "label": "Customer Contact Options",
+   "options": "Phone number or email\nEmail only"
+  },
+  {
+   "default": "1",
+   "fieldname": "require_phone_at_checkout",
+   "fieldtype": "Check",
+   "label": "Require Phone Number for Delivery"
+  },
+  {
+   "fieldname": "col_checkout_rules",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "allow_guest_checkout",
+   "fieldtype": "Check",
+   "label": "Allow Guest Checkout (No Account Needed)"
+  },
+  {
+   "default": "1",
+   "fieldname": "address_autocomplete",
+   "fieldtype": "Check",
+   "label": "Enable Google Address Autocomplete"
+  },
+  {
+   "fieldname": "sec_order_id_rules",
+   "fieldtype": "Section Break",
+   "label": "Order Identifier & Processing"
+  },
+  {
+   "default": "ORD-",
+   "fieldname": "order_prefix",
+   "fieldtype": "Data",
+   "label": "Order Number Prefix"
+  },
+  {
+   "fieldname": "order_suffix",
+   "fieldtype": "Data",
+   "label": "Order Number Suffix"
+  },
+  {
+   "fieldname": "col_order_limits",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "minimum_order_amount",
+   "fieldtype": "Currency",
+   "label": "Minimum Order Amount"
+  },
+  {
+   "default": "1",
+   "fieldname": "auto_archive_orders",
+   "fieldtype": "Check",
+   "label": "Automatically Archive Fulfilled Orders"
+  },
+  {
+   "fieldname": "tab_customer_accounts",
+   "fieldtype": "Tab Break",
+   "label": "Customer accounts"
+  },
+  {
+   "fieldname": "sec_cust_acc_prefs",
+   "fieldtype": "Section Break",
+   "label": "Account Login & Requirements"
+  },
+  {
+   "default": "Accounts are optional",
+   "fieldname": "customer_account_requirement",
+   "fieldtype": "Select",
+   "label": "Customer Accounts in Online Store",
+   "options": "Accounts are optional\nAccounts are required to checkout\nDon't use accounts"
+  },
+  {
+   "default": "New customer accounts (Passwordless one-time verification code)",
+   "fieldname": "customer_account_version",
+   "fieldtype": "Select",
+   "label": "Account Version",
+   "options": "New customer accounts (Passwordless one-time verification code)\nClassic customer accounts (Email & password)"
+  },
+  {
+   "fieldname": "col_cust_acc_social",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "allow_customer_registration",
+   "fieldtype": "Check",
+   "label": "Allow Customer Self-Registration"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_google_login",
+   "fieldtype": "Check",
+   "label": "Enable Sign In with Google"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_facebook_login",
+   "fieldtype": "Check",
+   "label": "Enable Sign In with Facebook"
+  },
+  {
+   "fieldname": "tab_shipping",
+   "fieldtype": "Tab Break",
+   "label": "Shipping and delivery"
+  },
+  {
+   "fieldname": "sec_shipping_rates",
+   "fieldtype": "Section Break",
+   "label": "General Shipping Rates"
+  },
+  {
+   "default": "200",
+   "fieldname": "default_shipping_fee",
+   "fieldtype": "Currency",
+   "label": "Standard Shipping Fee"
+  },
+  {
+   "default": "3000",
+   "fieldname": "free_shipping_threshold",
+   "fieldtype": "Currency",
+   "label": "Free Shipping Minimum Order Amount"
+  },
+  {
+   "fieldname": "col_shipping_types",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "500",
+   "fieldname": "express_shipping_fee",
+   "fieldtype": "Currency",
+   "label": "Express Shipping Fee"
+  },
+  {
+   "default": "kg",
+   "fieldname": "weight_unit",
+   "fieldtype": "Select",
+   "label": "Weight Unit",
+   "options": "kg\ng\nlb\noz"
+  },
+  {
+   "default": "Flat Rate",
+   "fieldname": "shipping_calculation_type",
+   "fieldtype": "Select",
+   "label": "Calculation Type",
+   "options": "Flat Rate\nWeight Based\nCarrier Calculated"
+  },
+  {
+   "fieldname": "sec_local_delivery",
+   "fieldtype": "Section Break",
+   "label": "Local Delivery & Store Pickup"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_local_delivery",
+   "fieldtype": "Check",
+   "label": "Offer Local Delivery in Primary City"
+  },
+  {
+   "default": "150",
+   "fieldname": "local_delivery_fee",
+   "fieldtype": "Currency",
+   "label": "Local Delivery Fee"
+  },
+  {
+   "fieldname": "col_local_pickup",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_store_pickup",
+   "fieldtype": "Check",
+   "label": "Offer Store / Warehouse Pickup"
+  },
+  {
+   "default": "Usually ready in 2-4 hours. Bring your order confirmation email or SMS.",
+   "fieldname": "pickup_instructions",
+   "fieldtype": "Small Text",
+   "label": "Pickup Instructions"
+  },
+  {
+   "fieldname": "tab_taxes",
+   "fieldtype": "Tab Break",
+   "label": "Taxes and duties"
+  },
+  {
+   "fieldname": "sec_tax_rates",
+   "fieldtype": "Section Break",
+   "label": "Tax Calculations"
+  },
+  {
+   "default": "0",
+   "fieldname": "tax_percentage",
+   "fieldtype": "Percent",
+   "label": "Sales Tax / VAT Percentage (%)"
+  },
+  {
+   "default": "0",
+   "fieldname": "prices_include_tax",
+   "fieldtype": "Check",
+   "label": "All Prices Include Tax (VAT/GST Inclusive)"
+  },
+  {
+   "fieldname": "col_tax_meta",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "charge_tax_on_shipping",
+   "fieldtype": "Check",
+   "label": "Charge Tax on Shipping Rates"
+  },
+  {
+   "default": "STRN-12345678",
+   "fieldname": "tax_registration_number",
+   "fieldtype": "Data",
+   "label": "Sales Tax Registration Number (STRN)"
+  },
+  {
+   "fieldname": "tab_locations",
+   "fieldtype": "Tab Break",
+   "label": "Locations"
+  },
+  {
+   "fieldname": "sec_primary_location",
+   "fieldtype": "Section Break",
+   "label": "Default Fulfillment Location"
+  },
+  {
+   "default": "Ghar Mart Main Fulfillment Hub",
+   "fieldname": "primary_location_name",
+   "fieldtype": "Data",
+   "label": "Location Name"
+  },
+  {
+   "default": "Plot 45, Commercial Hub, Phase 5 DHA",
+   "fieldname": "location_address_line1",
+   "fieldtype": "Data",
+   "label": "Address Line 1"
+  },
+  {
+   "default": "Lahore",
+   "fieldname": "location_city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "col_location_details",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "54000",
+   "fieldname": "location_postal_code",
+   "fieldtype": "Data",
+   "label": "Postal Code"
+  },
+  {
+   "default": "+92 300 1234567",
+   "fieldname": "location_phone",
+   "fieldtype": "Data",
+   "label": "Location Phone"
+  },
+  {
+   "default": "1",
+   "fieldname": "fulfill_online_orders_from_here",
+   "fieldtype": "Check",
+   "label": "Fulfill Online Orders from this Location"
+  },
+  {
+   "fieldname": "tab_markets",
+   "fieldtype": "Tab Break",
+   "label": "Markets"
+  },
+  {
+   "fieldname": "sec_markets_config",
+   "fieldtype": "Section Break",
+   "label": "Market & Currencies"
+  },
+  {
+   "default": "Pakistan (Primary)",
+   "fieldname": "primary_market_name",
+   "fieldtype": "Data",
+   "label": "Primary Market"
   },
   {
    "default": "PKR",
@@ -62,55 +806,462 @@
    "label": "Currency Symbol"
   },
   {
-   "default": "ORD-",
-   "fieldname": "order_prefix",
-   "fieldtype": "Data",
-   "label": "Order Prefix"
-  },
-  {
-   "fieldname": "sec_checkout",
-   "fieldtype": "Section Break",
-   "label": "Checkout, Shipping & Taxes"
-  },
-  {
-   "default": "200",
-   "fieldname": "default_shipping_fee",
-   "fieldtype": "Currency",
-   "label": "Default Shipping Fee"
-  },
-  {
-   "default": "3000",
-   "fieldname": "free_shipping_threshold",
-   "fieldtype": "Currency",
-   "label": "Free Shipping Minimum Order"
-  },
-  {
-   "default": "0",
-   "fieldname": "tax_percentage",
-   "fieldtype": "Percent",
-   "label": "Sales Tax (%)"
-  },
-  {
-   "fieldname": "col_checkout",
+   "fieldname": "col_multi_currency",
    "fieldtype": "Column Break"
   },
   {
    "default": "1",
-   "fieldname": "allow_guest_checkout",
+   "fieldname": "multi_currency_enabled",
    "fieldtype": "Check",
-   "label": "Allow Guest Checkout"
+   "label": "Enable Multi-Currency Automatic Conversion"
   },
   {
    "default": "1",
-   "fieldname": "allow_cod",
+   "fieldname": "auto_currency_by_ip",
    "fieldtype": "Check",
-   "label": "Enable Cash on Delivery"
+   "label": "Auto-switch Currency by Visitor Location"
+  },
+  {
+   "default": "Pakistan, UAE, Saudi Arabia, United States, United Kingdom",
+   "fieldname": "target_countries",
+   "fieldtype": "Small Text",
+   "label": "Target International Markets"
+  },
+  {
+   "fieldname": "tab_apps",
+   "fieldtype": "Tab Break",
+   "label": "Apps"
+  },
+  {
+   "fieldname": "sec_apps_api",
+   "fieldtype": "Section Break",
+   "label": "Installed Apps & API Access"
+  },
+  {
+   "default": "8",
+   "fieldname": "installed_apps_count",
+   "fieldtype": "Int",
+   "label": "Installed Apps Count",
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_public_store_api",
+   "fieldtype": "Check",
+   "label": "Enable Headless Storefront REST API"
+  },
+  {
+   "fieldname": "col_api_tokens",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "storefront_access_token",
+   "fieldtype": "Password",
+   "label": "Storefront API Access Token"
+  },
+  {
+   "fieldname": "webhook_notifications_url",
+   "fieldtype": "Data",
+   "label": "External Webhooks Endpoint"
+  },
+  {
+   "fieldname": "tab_sales_channels",
+   "fieldtype": "Tab Break",
+   "label": "Sales channels"
+  },
+  {
+   "fieldname": "sec_channels_list",
+   "fieldtype": "Section Break",
+   "label": "Active Sales Channels"
+  },
+  {
+   "default": "1",
+   "fieldname": "channel_online_store",
+   "fieldtype": "Check",
+   "label": "Online Store (Web storefront)"
+  },
+  {
+   "default": "1",
+   "fieldname": "channel_pos",
+   "fieldtype": "Check",
+   "label": "Point of Sale (POS In-Store)"
+  },
+  {
+   "default": "1",
+   "fieldname": "channel_whatsapp",
+   "fieldtype": "Check",
+   "label": "WhatsApp Business Direct Orders"
+  },
+  {
+   "fieldname": "col_social_channels",
+   "fieldtype": "Column Break"
   },
   {
    "default": "0",
-   "fieldname": "allow_online_payment",
+   "fieldname": "channel_facebook",
    "fieldtype": "Check",
-   "label": "Enable Online Payment"
+   "label": "Facebook & Instagram Shop"
+  },
+  {
+   "default": "0",
+   "fieldname": "channel_tiktok",
+   "fieldtype": "Check",
+   "label": "TikTok Shop"
+  },
+  {
+   "default": "0",
+   "fieldname": "channel_google",
+   "fieldtype": "Check",
+   "label": "Google & YouTube Shopping"
+  },
+  {
+   "fieldname": "tab_domains",
+   "fieldtype": "Tab Break",
+   "label": "Domains"
+  },
+  {
+   "fieldname": "sec_domains_manage",
+   "fieldtype": "Section Break",
+   "label": "Domains & SSL"
+  },
+  {
+   "default": "mygharmart.store",
+   "fieldname": "custom_domain",
+   "fieldtype": "Data",
+   "label": "Primary Domain"
+  },
+  {
+   "default": "gharmart.myshopify.com",
+   "fieldname": "subdomain",
+   "fieldtype": "Data",
+   "label": "Default Platform Subdomain"
+  },
+  {
+   "fieldname": "col_ssl_status",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Active & Secure (SSL Enabled)",
+   "fieldname": "ssl_status",
+   "fieldtype": "Select",
+   "label": "SSL Certificate Status",
+   "options": "Active & Secure (SSL Enabled)\nPending Verification\nDisabled"
+  },
+  {
+   "default": "1",
+   "fieldname": "redirect_all_to_primary",
+   "fieldtype": "Check",
+   "label": "Redirect all traffic to Primary Domain"
+  },
+  {
+   "fieldname": "tab_customer_events",
+   "fieldtype": "Tab Break",
+   "label": "Customer events"
+  },
+  {
+   "fieldname": "sec_pixels_tracking",
+   "fieldtype": "Section Break",
+   "label": "Pixels & Event Analytics"
+  },
+  {
+   "default": "G-49X8Z12984",
+   "fieldname": "google_analytics_id",
+   "fieldtype": "Data",
+   "label": "Google Analytics 4 Measurement ID"
+  },
+  {
+   "default": "GTM-829104",
+   "fieldname": "google_tag_manager_id",
+   "fieldtype": "Data",
+   "label": "Google Tag Manager ID"
+  },
+  {
+   "fieldname": "col_pixels_social",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "489201948201",
+   "fieldname": "facebook_pixel_id",
+   "fieldtype": "Data",
+   "label": "Meta / Facebook Pixel ID"
+  },
+  {
+   "fieldname": "tiktok_pixel_id",
+   "fieldtype": "Data",
+   "label": "TikTok Pixel ID"
+  },
+  {
+   "fieldname": "sec_custom_tracking_scripts",
+   "fieldtype": "Section Break",
+   "label": "Custom Analytics Scripts"
+  },
+  {
+   "fieldname": "custom_head_script",
+   "fieldtype": "Code",
+   "label": "Head Tag Tracking Code"
+  },
+  {
+   "fieldname": "custom_body_script",
+   "fieldtype": "Code",
+   "label": "Body Tag Tracking Code"
+  },
+  {
+   "fieldname": "tab_notifications",
+   "fieldtype": "Tab Break",
+   "label": "Notifications"
+  },
+  {
+   "fieldname": "sec_customer_email_notifs",
+   "fieldtype": "Section Break",
+   "label": "Customer Email Notifications"
+  },
+  {
+   "default": "1",
+   "fieldname": "notify_order_confirmation",
+   "fieldtype": "Check",
+   "label": "Send Order Confirmation Email"
+  },
+  {
+   "default": "1",
+   "fieldname": "notify_order_shipped",
+   "fieldtype": "Check",
+   "label": "Send Shipping Confirmation with Tracking"
+  },
+  {
+   "default": "1",
+   "fieldname": "notify_order_cancelled",
+   "fieldtype": "Check",
+   "label": "Send Order Cancellation Notice"
+  },
+  {
+   "fieldname": "col_sms_notifs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "notify_sms_enabled",
+   "fieldtype": "Check",
+   "label": "Enable SMS Order Updates"
+  },
+  {
+   "default": "GHARMART",
+   "fieldname": "sms_sender_id",
+   "fieldtype": "Data",
+   "label": "SMS Sender Header / ID"
+  },
+  {
+   "fieldname": "sec_staff_alerts",
+   "fieldtype": "Section Break",
+   "label": "Staff Order Alerts"
+  },
+  {
+   "default": "orders@mygharmart.store",
+   "fieldname": "order_notification_email",
+   "fieldtype": "Data",
+   "label": "Staff Notification Email"
+  },
+  {
+   "default": "1",
+   "fieldname": "notify_out_of_stock_admin",
+   "fieldtype": "Check",
+   "label": "Alert Staff on Low Inventory"
+  },
+  {
+   "fieldname": "tab_metafields",
+   "fieldtype": "Tab Break",
+   "label": "Metafields and metaobjects"
+  },
+  {
+   "fieldname": "sec_metafields_definitions",
+   "fieldtype": "Section Break",
+   "label": "Custom Metadata"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_product_metafields",
+   "fieldtype": "Check",
+   "label": "Enable Product Custom Metafields"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_variant_metafields",
+   "fieldtype": "Check",
+   "label": "Enable Variant Custom Metafields"
+  },
+  {
+   "fieldname": "col_meta_collections",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_collection_metafields",
+   "fieldtype": "Check",
+   "label": "Enable Category / Collection Metafields"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_customer_metafields",
+   "fieldtype": "Check",
+   "label": "Enable Customer Profile Metafields"
+  },
+  {
+   "fieldname": "sec_metaobjects_schema",
+   "fieldtype": "Section Break",
+   "label": "Metaobjects JSON Schema"
+  },
+  {
+   "default": "{\n  \"product_extra\": {\"warranty\": \"string\", \"material\": \"string\"}\n}",
+   "fieldname": "custom_metafields_schema",
+   "fieldtype": "Code",
+   "label": "Custom Metaobjects JSON Schema"
+  },
+  {
+   "fieldname": "tab_languages",
+   "fieldtype": "Tab Break",
+   "label": "Languages"
+  },
+  {
+   "fieldname": "sec_store_languages",
+   "fieldtype": "Section Break",
+   "label": "Store Languages & Localization"
+  },
+  {
+   "default": "en - English",
+   "fieldname": "default_language",
+   "fieldtype": "Select",
+   "label": "Store Default Language",
+   "options": "en - English\nur - Urdu\nar - Arabic\nes - Spanish\nfr - French"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_rtl_support",
+   "fieldtype": "Check",
+   "label": "Enable Right-to-Left (RTL) Layout for Urdu & Arabic"
+  },
+  {
+   "fieldname": "col_lang_support",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "English (Default)\nUrdu (\u0627\u0631\u062f\u0648)\nArabic (\u0627\u0644\u0639\u0631\u0628\u064a\u0629)",
+   "fieldname": "supported_languages",
+   "fieldtype": "Small Text",
+   "label": "Published Languages"
+  },
+  {
+   "default": "0",
+   "fieldname": "auto_translate_store",
+   "fieldtype": "Check",
+   "label": "Auto-translate Product Catalog with AI"
+  },
+  {
+   "fieldname": "tab_customer_privacy",
+   "fieldtype": "Tab Break",
+   "label": "Customer privacy"
+  },
+  {
+   "fieldname": "sec_cookie_consent",
+   "fieldtype": "Section Break",
+   "label": "Cookie Consent & Privacy"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_cookie_banner",
+   "fieldtype": "Check",
+   "label": "Show Cookie Consent Banner"
+  },
+  {
+   "default": "0",
+   "fieldname": "consent_mode_gdpr",
+   "fieldtype": "Check",
+   "label": "Strict GDPR / CCPA Compliance Mode"
+  },
+  {
+   "fieldname": "col_data_retention",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "730",
+   "fieldname": "data_retention_days",
+   "fieldtype": "Int",
+   "label": "Customer Data Retention (Days)"
+  },
+  {
+   "default": "1",
+   "fieldname": "allow_account_deletion",
+   "fieldtype": "Check",
+   "label": "Allow Customers to Request Account Deletion"
+  },
+  {
+   "fieldname": "sec_cookie_banner_text",
+   "fieldtype": "Section Break",
+   "label": "Cookie Banner Display"
+  },
+  {
+   "default": "We use cookies to improve your browsing experience and provide personalized store recommendations.",
+   "fieldname": "cookie_banner_text",
+   "fieldtype": "Small Text",
+   "label": "Cookie Banner Message"
+  },
+  {
+   "fieldname": "tab_policies",
+   "fieldtype": "Tab Break",
+   "label": "Policies"
+  },
+  {
+   "fieldname": "sec_refund_policy",
+   "fieldtype": "Section Break",
+   "label": "Refund & Return Policy"
+  },
+  {
+   "default": "We offer a 30-day money-back guarantee for unused items in original packaging.",
+   "fieldname": "refund_policy",
+   "fieldtype": "Text Editor",
+   "label": "Refund Policy Content"
+  },
+  {
+   "fieldname": "sec_privacy_policy",
+   "fieldtype": "Section Break",
+   "label": "Privacy Policy"
+  },
+  {
+   "default": "Your privacy is important to us. We do not sell your personal data to third parties.",
+   "fieldname": "privacy_policy",
+   "fieldtype": "Text Editor",
+   "label": "Privacy Policy Content"
+  },
+  {
+   "fieldname": "sec_terms_service",
+   "fieldtype": "Section Break",
+   "label": "Terms of Service"
+  },
+  {
+   "default": "By accessing or shopping at Ghar Mart, you agree to these terms and conditions.",
+   "fieldname": "terms_of_service",
+   "fieldtype": "Text Editor",
+   "label": "Terms of Service Content"
+  },
+  {
+   "fieldname": "sec_shipping_policy",
+   "fieldtype": "Section Break",
+   "label": "Shipping Policy"
+  },
+  {
+   "default": "Orders are processed within 24 hours. Standard delivery takes 2-4 business days.",
+   "fieldname": "shipping_policy",
+   "fieldtype": "Text Editor",
+   "label": "Shipping Policy Content"
+  },
+  {
+   "fieldname": "sec_legal_notice",
+   "fieldtype": "Section Break",
+   "label": "Contact Information & Legal Notice"
+  },
+  {
+   "default": "Ghar Mart Private Limited. Reg No: 0098241. Contact: support@mygharmart.store",
+   "fieldname": "legal_notice",
+   "fieldtype": "Text Editor",
+   "label": "Legal Notice & Business Details"
   }
  ],
  "grid_page_length": 50,
