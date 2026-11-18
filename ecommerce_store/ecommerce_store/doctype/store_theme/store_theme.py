@@ -1,6 +1,9 @@
 # Copyright (c) 2026, Zain and contributors
 # For license information, please see license.txt
 
+import os
+import json
+import subprocess
 import frappe
 from frappe.model.document import Document
 
@@ -94,4 +97,110 @@ def duplicate_theme(theme_name, new_name=None):
 		"status": "success",
 		"message": f"Template '{new_doc.theme_name}' created!",
 		"theme": new_doc.as_dict()
+	}
+
+
+@frappe.whitelist()
+def deploy_theme_from_github(repo_url, branch="main", theme_name=None, publish_now=False):
+	"""
+	Clones a theme from GitHub repository, parses theme metadata/config,
+	creates or updates a Store Theme document, and optionally publishes it immediately.
+	"""
+	if not frappe.has_permission("Store Theme", "create"):
+		frappe.throw("Not permitted to install themes", frappe.PermissionError)
+
+	if not repo_url:
+		frappe.throw("GitHub Repository URL is required")
+
+	repo_url = repo_url.strip()
+	branch = (branch or "main").strip()
+
+	# Derive a clean theme name if not provided
+	if not theme_name:
+		repo_clean = repo_url.rstrip("/").split("/")[-1]
+		if repo_clean.endswith(".git"):
+			repo_clean = repo_clean[:-4]
+		theme_name = repo_clean.replace("-", " ").replace("_", " ").title()
+
+	target_dir = os.path.join(frappe.get_site_path("public", "themes"), frappe.scrub(theme_name))
+	os.makedirs(os.path.dirname(target_dir), exist_ok=True)
+
+	try:
+		if os.path.exists(target_dir):
+			subprocess.run(
+				["git", "-C", target_dir, "pull", "origin", branch],
+				check=True,
+				capture_output=True,
+				text=True
+			)
+		else:
+			subprocess.run(
+				["git", "clone", "--depth", "1", "--branch", branch, repo_url, target_dir],
+				check=True,
+				capture_output=True,
+				text=True
+			)
+	except subprocess.CalledProcessError as e:
+		err_msg = e.stderr or e.stdout or str(e)
+		frappe.throw(f"Git Clone / Pull failed: {err_msg}")
+
+	# Check for theme.json or config.json inside the repo
+	config_file = os.path.join(target_dir, "theme.json")
+	if not os.path.exists(config_file):
+		config_file = os.path.join(target_dir, "config.json")
+
+	theme_meta = {}
+	if os.path.exists(config_file):
+		try:
+			with open(config_file, "r") as f:
+				theme_meta = json.load(f)
+		except Exception:
+			pass
+
+	# Read custom CSS if present
+	custom_css = ""
+	css_file = os.path.join(target_dir, "style.css")
+	if os.path.exists(css_file):
+		try:
+			with open(css_file, "r") as f:
+				custom_css = f.read()
+		except Exception:
+			pass
+
+	# Create or update Store Theme document
+	if frappe.db.exists("Store Theme", theme_name):
+		doc = frappe.get_doc("Store Theme", theme_name)
+	else:
+		doc = frappe.new_doc("Store Theme")
+		doc.theme_name = theme_name
+
+	doc.category = theme_meta.get("category", "General & Multipurpose")
+	doc.description = theme_meta.get("description", f"Imported from {repo_url} (branch: {branch})")
+	doc.badge_text = "GitHub"
+	doc.version = theme_meta.get("version", "1.0.0")
+	doc.primary_color = theme_meta.get("primary_color", "#0284c7")
+	doc.secondary_color = theme_meta.get("secondary_color", "#0f172a")
+	doc.accent_color = theme_meta.get("accent_color", "#f59e0b")
+	doc.bg_color = theme_meta.get("bg_color", "#ffffff")
+	doc.text_color = theme_meta.get("text_color", "#1e293b")
+	doc.font_heading = theme_meta.get("font_heading", "Plus Jakarta Sans")
+	doc.font_body = theme_meta.get("font_body", "Inter")
+	doc.header_style = theme_meta.get("header_style", "Minimal Top Bar")
+	doc.hero_banner_style = theme_meta.get("hero_banner_style", "Full Width Hero Slider")
+	doc.product_card_style = theme_meta.get("product_card_style", "Card with Shadow")
+	doc.cart_type = theme_meta.get("cart_type", "Slide-out Drawer Cart")
+	doc.footer_style = theme_meta.get("footer_style", "Multi-column Mega Footer")
+	doc.custom_css = custom_css or theme_meta.get("custom_css", "")
+	doc.is_active = 1 if frappe.utils.cint(publish_now) else 0
+
+	doc.save(ignore_permissions=True)
+	frappe.db.commit()
+
+	if doc.is_active:
+		sync_theme_to_settings(doc)
+
+	return {
+		"status": "success",
+		"message": f"Theme '{doc.theme_name}' successfully deployed from GitHub!",
+		"theme": doc.as_dict()
 	}
