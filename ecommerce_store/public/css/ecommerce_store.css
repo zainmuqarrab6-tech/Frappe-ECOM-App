@@ -42,3 +42,101 @@
 	padding-top: 8px !important;
 	cursor: pointer;
 }
+
+/* =========================================================================
+   Shopify-Style Products Submenu & Hierarchy
+   ========================================================================= */
+
+/* Products Item Container */
+.sidebar-item-container[item-name="Products"] {
+	position: relative;
+}
+
+/* Active Pill for Products Parent when on Products Page */
+.sidebar-item-container[item-name="Products"].shopify-parent-active > .standard-sidebar-item {
+	background: rgba(255, 255, 255, 0.08) !important;
+	border: 1.5px solid #818cf8 !important;
+	border-radius: 20px !important;
+	box-shadow: 0 0 10px rgba(129, 140, 248, 0.2) !important;
+}
+
+.sidebar-item-container[item-name="Products"].shopify-parent-active > .standard-sidebar-item .item-anchor {
+	color: #ffffff !important;
+	font-weight: 700 !important;
+}
+
+/* Chevron arrow on Products */
+.shopify-product-chevron {
+	margin-left: auto !important;
+	background: none !important;
+	border: none !important;
+	padding: 2px 6px !important;
+	color: var(--text-muted, #94a3b8) !important;
+	cursor: pointer !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s !important;
+}
+
+.shopify-product-chevron:hover {
+	color: #ffffff !important;
+}
+
+.shopify-product-chevron.collapsed {
+	transform: rotate(-90deg) !important;
+}
+
+/* Sub-items Container Indented directly under Products */
+.shopify-product-subitems {
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 2px !important;
+	margin-top: 4px !important;
+	margin-bottom: 8px !important;
+	padding-left: 28px !important;
+	transition: all 0.25s ease !important;
+}
+
+.shopify-product-subitems.collapsed {
+	display: none !important;
+}
+
+/* Hide Icons on Sub-items to match Shopify Screenshot exactly */
+.shopify-product-subitems .sidebar-item-icon {
+	display: none !important;
+}
+
+/* Sub-item Links Styling */
+.shopify-product-subitems .sidebar-item-container {
+	margin: 0 !important;
+}
+
+.shopify-product-subitems .standard-sidebar-item {
+	padding: 0 !important;
+}
+
+.shopify-product-subitems .item-anchor {
+	font-size: 13.5px !important;
+	font-weight: 500 !important;
+	color: #94a3b8 !important;
+	padding: 5px 10px !important;
+	border-radius: 6px !important;
+	display: block !important;
+	transition: all 0.15s ease !important;
+	text-decoration: none !important;
+}
+
+.shopify-product-subitems .item-anchor:hover {
+	color: #ffffff !important;
+	background: rgba(255, 255, 255, 0.06) !important;
+	transform: translateX(2px) !important;
+}
+
+/* Active Sub-item styling */
+.shopify-product-subitems .sidebar-item-container.active-subitem .item-anchor,
+.shopify-product-subitems .item-anchor.active-sidebar {
+	color: #ffffff !important;
+	font-weight: 700 !important;
+	background: rgba(255, 255, 255, 0.12) !important;
+}
