@@ -12,9 +12,17 @@
    "link_to": "Ecommerce Store",
    "link_type": "Sidebar",
    "title": "Ecommerce Store"
+  },
+  {
+   "added": 0,
+   "hidden": 0,
+   "icon": "settings",
+   "link_type": "URL",
+   "title": "Settings",
+   "url": "/desk/store-settings"
   }
  ],
- "modified": "2026-11-18 10:37:37.060675",
+ "modified": "2026-11-18 11:27:07.512275",
  "modified_by": "Administrator",
  "name": "ecommerce_store",
  "owner": "Administrator",

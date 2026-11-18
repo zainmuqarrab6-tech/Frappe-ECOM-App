@@ -24,8 +24,8 @@ add_to_apps_screen = [
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/ecommerce_store/css/ecommerce_store.css"
-# app_include_js = "/assets/ecommerce_store/js/ecommerce_store.js"
+app_include_css = "/assets/ecommerce_store/css/ecommerce_store.css"
+app_include_js = "/assets/ecommerce_store/js/ecommerce_store.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/ecommerce_store/css/ecommerce_store.css"

@@ -1,0 +1,44 @@
+/* Pinned Settings at the end (bottom) of the left side panel */
+
+.body-sidebar {
+	display: flex !important;
+	flex-direction: column !important;
+}
+
+.body-sidebar .body-sidebar-top {
+	display: flex !important;
+	flex-direction: column !important;
+	flex: 1 1 auto !important;
+}
+
+.body-sidebar .body-sidebar-top .sidebar-items {
+	display: flex !important;
+	flex-direction: column !important;
+	flex: 1 1 auto !important;
+	min-height: 100% !important;
+}
+
+/* Push Settings item to the very bottom / end of the left sidebar */
+.body-sidebar .sidebar-item-container[item-name="Settings"] {
+	margin-top: auto !important;
+	padding-top: 10px !important;
+	border-top: 1px solid var(--outline-gray-1, rgba(255, 255, 255, 0.08)) !important;
+	margin-bottom: 6px !important;
+}
+
+.body-sidebar .sidebar-item-container[item-name="Settings"] .item-anchor {
+	font-weight: 500 !important;
+	color: var(--text-color, #e4e7ec) !important;
+}
+
+.body-sidebar .sidebar-item-container[item-name="Settings"]:hover .item-anchor {
+	color: #ffffff !important;
+}
+
+/* Dock Settings button at the end of dock icons */
+.dock-item-settings-bottom {
+	margin-top: auto !important;
+	border-top: 1px solid var(--outline-gray-1, rgba(255, 255, 255, 0.08));
+	padding-top: 8px !important;
+	cursor: pointer;
+}
