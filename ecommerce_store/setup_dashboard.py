@@ -511,6 +511,7 @@ frappe.call({
     ]
 
     ws_doc = frappe.get_doc("Workspace", "Ecommerce Store")
+    ws_doc.type = "Workspace"
     ws_doc.content = json.dumps(ws_content)
     ws_doc.set("custom_blocks", [{"custom_block_name": block_name}])
     ws_doc.set("charts", [
