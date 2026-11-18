@@ -264,6 +264,22 @@ def update_all():
 		},
 		{
 			"added": 0,
+			"child": 1,
+			"hidden": 0,
+			"icon": "external-link",
+			"indent": 1,
+			"is_default_module": 0,
+			"keep_closed": 0,
+			"label": "Visit Live Store",
+			"link_to": None,
+			"link_type": "URL",
+			"open_in_new_tab": 1,
+			"show_arrow": 0,
+			"type": "Link",
+			"url": "/store"
+		},
+		{
+			"added": 0,
 			"child": 0,
 			"collapsible": 0,
 			"hidden": 0,

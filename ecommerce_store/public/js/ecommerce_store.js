@@ -17,13 +17,46 @@
 		if ($el.length) return $el;
 		$el = $(`.body-sidebar .sidebar-items .sidebar-item-container[data-id="${label}"]`);
 		if ($el.length) return $el;
-		$(`.body-sidebar .sidebar-items .sidebar-item-container`).each(function () {
+		$el = $(`.body-sidebar .body-sidebar-bottom .sidebar-item-container[item-name="${label}"]`);
+		if ($el.length) return $el;
+		$(`.body-sidebar .sidebar-item-container`).each(function () {
 			if ($(this).find(".sidebar-item-label").first().text().trim() === label) {
 				$el = $(this);
 				return false;
 			}
 		});
 		return $el;
+	}
+
+	function removeDockSettings() {
+		const $dock = $("#desk-dock");
+		if (!$dock.length) return;
+
+		$dock.find(".dock-item-settings-bottom").remove();
+
+		$dock.find(".dock-item").each(function () {
+			const $btn = $(this);
+			if ($btn.hasClass("dock-user-button")) return;
+
+			const label = (
+				$btn.attr("aria-label") ||
+				$btn.attr("title") ||
+				$btn.text() ||
+				""
+			).trim().toLowerCase();
+
+			if (label.includes("setting")) {
+				$btn.remove();
+				return;
+			}
+
+			if (
+				$btn.find("svg.icon-settings, [data-icon='settings'], [item-icon='settings']").length ||
+				$btn.find("use[href*='setting'], svg [href*='setting']").length
+			) {
+				$btn.remove();
+			}
+		});
 	}
 
 	function setupShopifyProductSubmenu() {
@@ -102,21 +135,34 @@
 	}
 
 	function pinSettingsAtEnd() {
-		// Clean up any stray dock gear buttons so there is only ONE settings button
-		$("#desk-dock .dock-item-settings-bottom").remove();
-		$("#desk-dock .dock-item[title='Settings']").remove();
+		// 1. Proactively remove left dock gear buttons
+		removeDockSettings();
 
-		// Keep single Settings link at the very end of sidebar-items
-		const $sidebarItems = $(".body-sidebar .sidebar-items");
-		const $settingsItem = findSidebarItem("Settings");
+		// 2. Locate Settings in sidebar
+		let $settingsItem = findSidebarItem("Settings");
+		if (!$settingsItem || !$settingsItem.length) {
+			$settingsItem = $(".body-sidebar .sidebar-item-container[item-name='Settings']");
+		}
+		if (!$settingsItem || !$settingsItem.length) {
+			$settingsItem = $(".body-sidebar .sidebar-item-container:has([href*='Store%20Settings'], [href*='store-settings'])");
+		}
+
 		if ($settingsItem && $settingsItem.length) {
-			$sidebarItems.append($settingsItem);
-			$settingsItem.css({
-				"margin-top": "auto",
-				"padding-top": "10px",
-				"border-top": "1px solid var(--outline-gray-1, rgba(255, 255, 255, 0.08))",
-				"margin-bottom": "6px"
-			});
+			const $sidebarBottom = $(".body-sidebar .body-sidebar-bottom");
+			if ($sidebarBottom.length) {
+				// Move to bottom container so it sits at the absolute bottom of the panel
+				if (!$sidebarBottom.has($settingsItem).length) {
+					$sidebarBottom.prepend($settingsItem);
+				}
+			} else {
+				// Fallback: append to the end of sidebar-items
+				const $sidebarItems = $(".body-sidebar .sidebar-items");
+				if (!$sidebarItems.has($settingsItem).length) {
+					$sidebarItems.append($settingsItem);
+				}
+			}
+
+			$settingsItem.addClass("shopify-pinned-settings");
 		}
 	}
 
@@ -126,9 +172,10 @@
 	}
 
 	$(document).ready(function () {
-		setTimeout(runAllSidebarEnhancements, 100);
-		setTimeout(runAllSidebarEnhancements, 400);
-		setTimeout(runAllSidebarEnhancements, 1000);
+		setTimeout(runAllSidebarEnhancements, 50);
+		setTimeout(runAllSidebarEnhancements, 200);
+		setTimeout(runAllSidebarEnhancements, 600);
+		setTimeout(runAllSidebarEnhancements, 1200);
 	});
 
 	$(document).on("sidebar_setup", function () {
@@ -158,6 +205,14 @@
 			observer.observe(target, { childList: true });
 		} else {
 			setTimeout(attachObserver, 400);
+		}
+
+		const dockTarget = document.getElementById("desk-dock");
+		if (dockTarget) {
+			const dockObserver = new MutationObserver(function () {
+				removeDockSettings();
+			});
+			dockObserver.observe(dockTarget, { childList: true, subtree: true });
 		}
 	}
 	attachObserver();

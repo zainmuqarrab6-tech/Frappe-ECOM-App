@@ -1,14 +1,35 @@
-/* Pinned Settings at the end (bottom) of the left side panel */
+/* =========================================================================
+   Left Sidebar & Dock Layout (Shopify Style)
+   ========================================================================= */
 
+/* Completely hide any Settings button or gear icon in the left dock rail */
+#desk-dock .dock-item-settings-bottom,
+#desk-dock .dock-item[aria-label*="Setting" i],
+#desk-dock .dock-item[title*="Setting" i],
+#desk-dock .dock-items .dock-item[aria-label*="Setting" i],
+#desk-dock .dock-items .dock-item[title*="Setting" i],
+#desk-dock button:has([item-icon="settings"]),
+#desk-dock button:has([data-icon="settings"]),
+#desk-dock button:has(svg.icon-settings),
+#desk-dock button:has(svg [href*="setting"]),
+#desk-dock button:has(use[href*="settings"]) {
+	display: none !important;
+}
+
+/* Sidebar flex container structure */
 .body-sidebar {
 	display: flex !important;
 	flex-direction: column !important;
+	height: 100vh !important;
+	height: 100dvh !important;
 }
 
 .body-sidebar .body-sidebar-top {
 	display: flex !important;
 	flex-direction: column !important;
 	flex: 1 1 auto !important;
+	padding-bottom: 8px !important;
+	overflow-y: auto !important;
 }
 
 .body-sidebar .body-sidebar-top .sidebar-items {
@@ -18,29 +39,84 @@
 	min-height: 100% !important;
 }
 
-/* Push Settings item to the very bottom / end of the left sidebar */
-.body-sidebar .sidebar-item-container[item-name="Settings"] {
+/* Pinned Settings Container at the very bottom of the sidebar */
+.body-sidebar .body-sidebar-bottom {
+	display: flex !important;
+	flex-direction: column !important;
+	margin-top: auto !important;
+	padding: 8px 8px calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+	border-top: 1px solid var(--outline-gray-1, rgba(0, 0, 0, 0.08)) !important;
+	width: 100% !important;
+	background: inherit !important;
+}
+
+.body-sidebar .body-sidebar-bottom .sidebar-item-container[item-name="Settings"],
+.body-sidebar .body-sidebar-bottom .shopify-pinned-settings {
+	width: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border-top: none !important;
+}
+
+/* Fallback if Settings is inside .sidebar-items */
+.body-sidebar .sidebar-items .sidebar-item-container[item-name="Settings"],
+.body-sidebar .sidebar-items .shopify-pinned-settings {
 	margin-top: auto !important;
 	padding-top: 10px !important;
-	border-top: 1px solid var(--outline-gray-1, rgba(255, 255, 255, 0.08)) !important;
-	margin-bottom: 6px !important;
+	border-top: 1px solid var(--outline-gray-1, rgba(0, 0, 0, 0.08)) !important;
+	margin-bottom: 8px !important;
 }
 
-.body-sidebar .sidebar-item-container[item-name="Settings"] .item-anchor {
+/* Sidebar Settings Item Anchor & Hover Fix (Never White on Light BG) */
+.body-sidebar .sidebar-item-container[item-name="Settings"] .item-anchor,
+.body-sidebar .shopify-pinned-settings .item-anchor {
 	font-weight: 500 !important;
-	color: var(--text-color, #e4e7ec) !important;
+	color: var(--ink-gray-7, var(--text-color, #334155)) !important;
+	display: flex !important;
+	align-items: center !important;
+	height: 32px !important;
+	padding: 0 8px !important;
+	border-radius: var(--radius, 6px) !important;
+	transition: background-color 0.15s ease, color 0.15s ease !important;
+	text-decoration: none !important;
 }
 
-.body-sidebar .sidebar-item-container[item-name="Settings"]:hover .item-anchor {
+.body-sidebar .sidebar-item-container[item-name="Settings"] .sidebar-item-icon,
+.body-sidebar .shopify-pinned-settings .sidebar-item-icon {
+	color: var(--ink-gray-6, #64748b) !important;
+}
+
+.body-sidebar .sidebar-item-container[item-name="Settings"] .sidebar-item-icon svg,
+.body-sidebar .shopify-pinned-settings .sidebar-item-icon svg {
+	stroke: currentColor !important;
+}
+
+/* Hover State: Dark text with light gray background (crisp, clear, readable) */
+.body-sidebar .sidebar-item-container[item-name="Settings"]:hover .item-anchor,
+.body-sidebar .shopify-pinned-settings:hover .item-anchor,
+.body-sidebar .sidebar-item-container[item-name="Settings"] .item-anchor:hover,
+.body-sidebar .shopify-pinned-settings .item-anchor:hover {
+	color: var(--ink-gray-9, #0f172a) !important;
+	background-color: var(--surface-gray-2, rgba(0, 0, 0, 0.05)) !important;
+}
+
+.body-sidebar .sidebar-item-container[item-name="Settings"]:hover .sidebar-item-icon,
+.body-sidebar .shopify-pinned-settings:hover .sidebar-item-icon {
+	color: var(--ink-gray-9, #0f172a) !important;
+}
+
+/* Dark Theme overrides for Settings */
+[data-theme="dark"] .body-sidebar .sidebar-item-container[item-name="Settings"] .item-anchor,
+[data-theme="dark"] .body-sidebar .shopify-pinned-settings .item-anchor {
+	color: var(--ink-gray-5, #cbd5e1) !important;
+}
+
+[data-theme="dark"] .body-sidebar .sidebar-item-container[item-name="Settings"]:hover .item-anchor,
+[data-theme="dark"] .body-sidebar .shopify-pinned-settings:hover .item-anchor,
+[data-theme="dark"] .body-sidebar .sidebar-item-container[item-name="Settings"] .item-anchor:hover,
+[data-theme="dark"] .body-sidebar .shopify-pinned-settings .item-anchor:hover {
 	color: #ffffff !important;
-}
-
-/* Dock Settings button at the end of dock icons */
-.dock-item-settings-bottom {
-	margin-top: auto !important;
-	border-top: 1px solid var(--outline-gray-1, rgba(255, 255, 255, 0.08));
-	padding-top: 8px !important;
-	cursor: pointer;
+	background-color: var(--surface-gray-2, rgba(255, 255, 255, 0.08)) !important;
 }
 
 /* =========================================================================
@@ -54,15 +130,25 @@
 
 /* Active Pill for Products Parent when on Products Page */
 .sidebar-item-container[item-name="Products"].shopify-parent-active > .standard-sidebar-item {
-	background: rgba(255, 255, 255, 0.08) !important;
-	border: 1.5px solid #818cf8 !important;
+	background: var(--surface-gray-2, rgba(0, 0, 0, 0.04)) !important;
+	border: 1.5px solid var(--primary, #0284c7) !important;
 	border-radius: 20px !important;
+	box-shadow: 0 0 8px rgba(2, 132, 199, 0.15) !important;
+}
+
+[data-theme="dark"] .sidebar-item-container[item-name="Products"].shopify-parent-active > .standard-sidebar-item {
+	background: rgba(255, 255, 255, 0.08) !important;
+	border-color: #818cf8 !important;
 	box-shadow: 0 0 10px rgba(129, 140, 248, 0.2) !important;
 }
 
 .sidebar-item-container[item-name="Products"].shopify-parent-active > .standard-sidebar-item .item-anchor {
-	color: #ffffff !important;
+	color: var(--ink-gray-9, #0f172a) !important;
 	font-weight: 700 !important;
+}
+
+[data-theme="dark"] .sidebar-item-container[item-name="Products"].shopify-parent-active > .standard-sidebar-item .item-anchor {
+	color: #ffffff !important;
 }
 
 /* Chevron arrow on Products */
@@ -71,7 +157,7 @@
 	background: none !important;
 	border: none !important;
 	padding: 2px 6px !important;
-	color: var(--text-muted, #94a3b8) !important;
+	color: var(--ink-gray-5, #94a3b8) !important;
 	cursor: pointer !important;
 	display: inline-flex !important;
 	align-items: center !important;
@@ -80,6 +166,10 @@
 }
 
 .shopify-product-chevron:hover {
+	color: var(--ink-gray-9, #0f172a) !important;
+}
+
+[data-theme="dark"] .shopify-product-chevron:hover {
 	color: #ffffff !important;
 }
 
@@ -119,7 +209,7 @@
 .shopify-product-subitems .item-anchor {
 	font-size: 13.5px !important;
 	font-weight: 500 !important;
-	color: #94a3b8 !important;
+	color: var(--ink-gray-6, #64748b) !important;
 	padding: 5px 10px !important;
 	border-radius: 6px !important;
 	display: block !important;
@@ -128,15 +218,30 @@
 }
 
 .shopify-product-subitems .item-anchor:hover {
+	color: var(--ink-gray-9, #0f172a) !important;
+	background: var(--surface-gray-2, rgba(0, 0, 0, 0.04)) !important;
+	transform: translateX(2px) !important;
+}
+
+[data-theme="dark"] .shopify-product-subitems .item-anchor {
+	color: var(--ink-gray-5, #94a3b8) !important;
+}
+
+[data-theme="dark"] .shopify-product-subitems .item-anchor:hover {
 	color: #ffffff !important;
 	background: rgba(255, 255, 255, 0.06) !important;
-	transform: translateX(2px) !important;
 }
 
 /* Active Sub-item styling */
 .shopify-product-subitems .sidebar-item-container.active-subitem .item-anchor,
 .shopify-product-subitems .item-anchor.active-sidebar {
-	color: #ffffff !important;
+	color: var(--primary, #0284c7) !important;
 	font-weight: 700 !important;
+	background: var(--surface-gray-2, rgba(2, 132, 199, 0.08)) !important;
+}
+
+[data-theme="dark"] .shopify-product-subitems .sidebar-item-container.active-subitem .item-anchor,
+[data-theme="dark"] .shopify-product-subitems .item-anchor.active-sidebar {
+	color: #ffffff !important;
 	background: rgba(255, 255, 255, 0.12) !important;
 }
