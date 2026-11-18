@@ -11,9 +11,12 @@ frappe.ui.form.on("Store Settings", {
 
 		// Native Frappe action button
 		frm.add_custom_button(__("Visit Store"), function () {
-			const domain = frm.doc.custom_domain || frm.doc.primary_domain || window.location.origin;
-			const url = domain.startsWith("http") ? domain : `http://${domain}`;
-			window.open(url, "_blank");
+			if (frm.doc.custom_domain) {
+				const url = frm.doc.custom_domain.startsWith("http") ? frm.doc.custom_domain : `http://${frm.doc.custom_domain}`;
+				window.open(url, "_blank");
+			} else {
+				window.open("/store", "_blank");
+			}
 		});
 	}
 });

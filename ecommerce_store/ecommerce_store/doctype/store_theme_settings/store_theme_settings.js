@@ -661,7 +661,7 @@ function render_dashboard_html(frm, $wrapper, themes) {
 
 	// View store button
 	html.find("#btn-view-live-store").on("click", function () {
-		window.open("/", "_blank");
+		window.open("/store", "_blank");
 	});
 
 	// Live Theme Customizer button (Shopify style visual editor)

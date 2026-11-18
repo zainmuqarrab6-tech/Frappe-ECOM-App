@@ -685,7 +685,7 @@
 		<!-- 4. Right Preview Canvas with Live Frame -->
 		<main class="editor-preview-canvas">
 			<div class="preview-frame-wrap" id="preview-wrapper">
-				<iframe src="/" class="preview-iframe" id="storefront-iframe" onload="initIframeInspector()"></iframe>
+				<iframe src="/store" class="preview-iframe" id="storefront-iframe" onload="initIframeInspector()"></iframe>
 			</div>
 		</main>
 
@@ -1088,7 +1088,7 @@
 				btn.innerText = '✓ Saved';
 				isDirty = false;
 				// Refresh preview iframe to ensure everything is in sync
-				document.getElementById('storefront-iframe').src = '/';
+				document.getElementById('storefront-iframe').src = '/store';
 			})
 			.catch(err => {
 				alert('Saved successfully!');
