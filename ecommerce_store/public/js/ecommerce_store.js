@@ -29,18 +29,21 @@
 	}
 
 	function removeDockSettings() {
-		const $dock = $("#desk-dock");
+		const $dock = $("#desk-dock, .dock");
 		if (!$dock.length) return;
 
 		$dock.find(".dock-item-settings-bottom").remove();
 
-		$dock.find(".dock-item").each(function () {
+		$dock.find(".dock-item, button").each(function () {
 			const $btn = $(this);
-			if ($btn.hasClass("dock-user-button")) return;
+			if ($btn.hasClass("dock-user-button") || $btn.closest(".dock-user").length) return;
+			if ($btn.closest(".dock-logo").length) return;
 
 			const label = (
 				$btn.attr("aria-label") ||
 				$btn.attr("title") ||
+				$btn.attr("data-id") ||
+				$btn.attr("data-name") ||
 				$btn.text() ||
 				""
 			).trim().toLowerCase();
@@ -51,8 +54,9 @@
 			}
 
 			if (
-				$btn.find("svg.icon-settings, [data-icon='settings'], [item-icon='settings']").length ||
-				$btn.find("use[href*='setting'], svg [href*='setting']").length
+				$btn.find("svg.icon-settings, [data-icon*='setting'], [item-icon*='setting']").length ||
+				$btn.find("use[href*='setting'], svg [href*='setting']").length ||
+				$btn.find("svg path[d*='19.4 15']").length
 			) {
 				$btn.remove();
 			}
@@ -207,13 +211,19 @@
 			setTimeout(attachObserver, 400);
 		}
 
-		const dockTarget = document.getElementById("desk-dock");
-		if (dockTarget) {
-			const dockObserver = new MutationObserver(function () {
+		function attachDockObserver() {
+			const dockTarget = document.getElementById("desk-dock") || document.querySelector(".dock");
+			if (dockTarget) {
+				const dockObserver = new MutationObserver(function () {
+					removeDockSettings();
+				});
+				dockObserver.observe(dockTarget, { childList: true, subtree: true });
 				removeDockSettings();
-			});
-			dockObserver.observe(dockTarget, { childList: true, subtree: true });
+			} else {
+				setTimeout(attachDockObserver, 300);
+			}
 		}
+		attachDockObserver();
 	}
 	attachObserver();
 })();

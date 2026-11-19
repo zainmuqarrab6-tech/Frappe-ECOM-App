@@ -8,12 +8,31 @@
 #desk-dock .dock-item[title*="Setting" i],
 #desk-dock .dock-items .dock-item[aria-label*="Setting" i],
 #desk-dock .dock-items .dock-item[title*="Setting" i],
-#desk-dock button:has([item-icon="settings"]),
-#desk-dock button:has([data-icon="settings"]),
+#desk-dock button:has([item-icon*="setting" i]),
+#desk-dock button:has([data-icon*="setting" i]),
 #desk-dock button:has(svg.icon-settings),
-#desk-dock button:has(svg [href*="setting"]),
-#desk-dock button:has(use[href*="settings"]) {
+#desk-dock button:has(svg [href*="setting" i]),
+#desk-dock button:has(use[href*="setting" i]),
+#desk-dock button:has(svg path[d*="19.4 15"]),
+.dock .dock-item-settings-bottom,
+.dock .dock-item[aria-label*="Setting" i],
+.dock .dock-item[title*="Setting" i],
+.dock .dock-items .dock-item[aria-label*="Setting" i],
+.dock .dock-items .dock-item[title*="Setting" i],
+.dock button:has([item-icon*="setting" i]),
+.dock button:has([data-icon*="setting" i]),
+.dock button:has(svg.icon-settings),
+.dock button:has(svg [href*="setting" i]),
+.dock button:has(use[href*="setting" i]),
+.dock button:has(svg path[d*="19.4 15"]) {
 	display: none !important;
+	visibility: hidden !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+	height: 0 !important;
+	width: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
 /* Sidebar flex container structure */
