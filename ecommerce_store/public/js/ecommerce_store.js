@@ -177,15 +177,28 @@
 		}
 	}
 
+	function enableDeskFullWidth() {
+		try {
+			localStorage.container_fullwidth = "true";
+			$(document.body).addClass("full-width");
+			if (window.frappe && frappe.ui && frappe.ui.toolbar) {
+				frappe.ui.toolbar.set_fullwidth_if_enabled();
+			}
+		} catch (e) {}
+	}
+
 	function runAllSidebarEnhancements() {
+		enableDeskFullWidth();
 		removeDockSettings();
 		setupShopifyProductSubmenu();
 		pinSettingsAtEnd();
 	}
 
 	removeDockSettings();
+	enableDeskFullWidth();
 
 	$(document).ready(function () {
+		enableDeskFullWidth();
 		removeDockSettings();
 		setTimeout(runAllSidebarEnhancements, 20);
 		setTimeout(runAllSidebarEnhancements, 100);
@@ -195,11 +208,13 @@
 	});
 
 	$(document).on("sidebar_setup", function () {
+		enableDeskFullWidth();
 		setTimeout(runAllSidebarEnhancements, 30);
 	});
 
 	if (window.frappe && frappe.router) {
 		frappe.router.on("change", function () {
+			enableDeskFullWidth();
 			setTimeout(runAllSidebarEnhancements, 50);
 		});
 	}
