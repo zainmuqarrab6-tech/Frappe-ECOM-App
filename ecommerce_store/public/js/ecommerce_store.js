@@ -3,6 +3,7 @@
 
 (function () {
 	let isNestingSubmenu = false;
+	let isPinningSettings = false;
 
 	const SUB_ITEMS = [
 		{ name: "Collections", route: "product-category" },
@@ -34,7 +35,7 @@
 
 		$dock.find(".dock-item-settings-bottom").remove();
 
-		$dock.find(".dock-item, button").each(function () {
+		$dock.find(".dock-item, button, a").each(function () {
 			const $btn = $(this);
 			if ($btn.hasClass("dock-user-button") || $btn.closest(".dock-user").length) return;
 			if ($btn.closest(".dock-logo").length) return;
@@ -139,62 +140,73 @@
 	}
 
 	function pinSettingsAtEnd() {
-		// 1. Proactively remove left dock gear buttons
-		removeDockSettings();
+		if (isPinningSettings) return;
+		isPinningSettings = true;
+		try {
+			// 1. Proactively remove left dock gear buttons
+			removeDockSettings();
 
-		// 2. Locate Settings in sidebar
-		let $settingsItem = findSidebarItem("Settings");
-		if (!$settingsItem || !$settingsItem.length) {
-			$settingsItem = $(".body-sidebar .sidebar-item-container[item-name='Settings']");
-		}
-		if (!$settingsItem || !$settingsItem.length) {
-			$settingsItem = $(".body-sidebar .sidebar-item-container:has([href*='Store%20Settings'], [href*='store-settings'])");
-		}
-
-		if ($settingsItem && $settingsItem.length) {
-			const $sidebarBottom = $(".body-sidebar .body-sidebar-bottom");
-			if ($sidebarBottom.length) {
-				// Move to bottom container so it sits at the absolute bottom of the panel
-				if (!$sidebarBottom.has($settingsItem).length) {
-					$sidebarBottom.prepend($settingsItem);
-				}
-			} else {
-				// Fallback: append to the end of sidebar-items
-				const $sidebarItems = $(".body-sidebar .sidebar-items");
-				if (!$sidebarItems.has($settingsItem).length) {
-					$sidebarItems.append($settingsItem);
-				}
+			// 2. Locate Settings in sidebar
+			let $settingsItem = findSidebarItem("Settings");
+			if (!$settingsItem || !$settingsItem.length) {
+				$settingsItem = $(".body-sidebar .sidebar-item-container[item-name='Settings']");
+			}
+			if (!$settingsItem || !$settingsItem.length) {
+				$settingsItem = $(".body-sidebar .sidebar-item-container:has([href*='Store%20Settings'], [href*='store-settings'])");
 			}
 
-			$settingsItem.addClass("shopify-pinned-settings");
+			if ($settingsItem && $settingsItem.length) {
+				const $sidebarBottom = $(".body-sidebar .body-sidebar-bottom");
+				if ($sidebarBottom.length) {
+					// Move to bottom container so it sits at the absolute bottom of the panel
+					if (!$sidebarBottom.children(".sidebar-item-container[item-name='Settings']").length) {
+						$sidebarBottom.append($settingsItem);
+					}
+				} else {
+					// Fallback: append to the end of sidebar-items
+					const $sidebarItems = $(".body-sidebar .sidebar-items");
+					if (!$sidebarItems.has($settingsItem).length) {
+						$sidebarItems.append($settingsItem);
+					}
+				}
+
+				$settingsItem.addClass("shopify-pinned-settings");
+			}
+		} finally {
+			isPinningSettings = false;
 		}
 	}
 
 	function runAllSidebarEnhancements() {
+		removeDockSettings();
 		setupShopifyProductSubmenu();
 		pinSettingsAtEnd();
 	}
 
+	removeDockSettings();
+
 	$(document).ready(function () {
-		setTimeout(runAllSidebarEnhancements, 50);
-		setTimeout(runAllSidebarEnhancements, 200);
-		setTimeout(runAllSidebarEnhancements, 600);
-		setTimeout(runAllSidebarEnhancements, 1200);
+		removeDockSettings();
+		setTimeout(runAllSidebarEnhancements, 20);
+		setTimeout(runAllSidebarEnhancements, 100);
+		setTimeout(runAllSidebarEnhancements, 300);
+		setTimeout(runAllSidebarEnhancements, 700);
+		setTimeout(runAllSidebarEnhancements, 1500);
 	});
 
 	$(document).on("sidebar_setup", function () {
-		setTimeout(runAllSidebarEnhancements, 50);
+		setTimeout(runAllSidebarEnhancements, 30);
 	});
 
 	if (window.frappe && frappe.router) {
 		frappe.router.on("change", function () {
-			setTimeout(runAllSidebarEnhancements, 80);
+			setTimeout(runAllSidebarEnhancements, 50);
 		});
 	}
 
-	// Observer on .sidebar-items
+	// Observer on sidebar
 	const observer = new MutationObserver(function (mutations) {
-		if (isNestingSubmenu) return;
+		if (isNestingSubmenu || isPinningSettings) return;
 		for (const m of mutations) {
 			if (m.addedNodes.length > 0) {
 				setTimeout(runAllSidebarEnhancements, 40);
@@ -204,11 +216,11 @@
 	});
 
 	function attachObserver() {
-		const target = document.querySelector(".body-sidebar .sidebar-items");
+		const target = document.querySelector(".body-sidebar");
 		if (target) {
-			observer.observe(target, { childList: true });
+			observer.observe(target, { childList: true, subtree: true });
 		} else {
-			setTimeout(attachObserver, 400);
+			setTimeout(attachObserver, 300);
 		}
 
 		function attachDockObserver() {

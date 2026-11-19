@@ -8,6 +8,10 @@
 #desk-dock .dock-item[title*="Setting" i],
 #desk-dock .dock-items .dock-item[aria-label*="Setting" i],
 #desk-dock .dock-items .dock-item[title*="Setting" i],
+#desk-dock button[aria-label*="Setting" i],
+#desk-dock button[title*="Setting" i],
+#desk-dock a[aria-label*="Setting" i],
+#desk-dock a[title*="Setting" i],
 #desk-dock button:has([item-icon*="setting" i]),
 #desk-dock button:has([data-icon*="setting" i]),
 #desk-dock button:has(svg.icon-settings),
@@ -19,6 +23,10 @@
 .dock .dock-item[title*="Setting" i],
 .dock .dock-items .dock-item[aria-label*="Setting" i],
 .dock .dock-items .dock-item[title*="Setting" i],
+.dock button[aria-label*="Setting" i],
+.dock button[title*="Setting" i],
+.dock a[aria-label*="Setting" i],
+.dock a[title*="Setting" i],
 .dock button:has([item-icon*="setting" i]),
 .dock button:has([data-icon*="setting" i]),
 .dock button:has(svg.icon-settings),
@@ -47,7 +55,7 @@
 	display: flex !important;
 	flex-direction: column !important;
 	flex: 1 1 auto !important;
-	padding-bottom: 8px !important;
+	padding: 2px 8px 8px !important;
 	overflow-y: auto !important;
 }
 
@@ -62,77 +70,120 @@
 .body-sidebar .body-sidebar-bottom {
 	display: flex !important;
 	flex-direction: column !important;
+	justify-content: flex-end !important;
 	margin-top: auto !important;
-	padding: 8px 8px calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+	padding: 8px 8px 12px 8px !important;
 	border-top: 1px solid var(--outline-gray-1, rgba(0, 0, 0, 0.08)) !important;
 	width: 100% !important;
 	background: inherit !important;
+	box-sizing: border-box !important;
+}
+
+.body-sidebar .body-sidebar-bottom .promotional-banners:empty {
+	display: none !important;
+}
+
+.body-sidebar .body-sidebar-bottom .dropdown-navbar-user {
+	display: none !important;
 }
 
 .body-sidebar .body-sidebar-bottom .sidebar-item-container[item-name="Settings"],
+.body-sidebar .body-sidebar-bottom .sidebar-item-container[data-id="Settings"],
 .body-sidebar .body-sidebar-bottom .shopify-pinned-settings {
 	width: 100% !important;
 	margin: 0 !important;
 	padding: 0 !important;
 	border-top: none !important;
+	order: 99999 !important;
+}
+
+.body-sidebar .body-sidebar-bottom .sidebar-item-container[item-name="Settings"] .standard-sidebar-item,
+.body-sidebar .body-sidebar-bottom .sidebar-item-container[data-id="Settings"] .standard-sidebar-item,
+.body-sidebar .body-sidebar-bottom .shopify-pinned-settings .standard-sidebar-item {
+	margin: 0 !important;
+	padding: 0 !important;
+	height: 34px !important;
+	display: flex !important;
+	align-items: center !important;
 }
 
 /* Fallback if Settings is inside .sidebar-items */
 .body-sidebar .sidebar-items .sidebar-item-container[item-name="Settings"],
+.body-sidebar .sidebar-items .sidebar-item-container[data-id="Settings"],
 .body-sidebar .sidebar-items .shopify-pinned-settings {
 	margin-top: auto !important;
-	padding-top: 10px !important;
+	order: 99999 !important;
+	padding-top: 8px !important;
 	border-top: 1px solid var(--outline-gray-1, rgba(0, 0, 0, 0.08)) !important;
-	margin-bottom: 8px !important;
+	margin-bottom: 4px !important;
 }
 
 /* Sidebar Settings Item Anchor & Hover Fix (Never White on Light BG) */
 .body-sidebar .sidebar-item-container[item-name="Settings"] .item-anchor,
+.body-sidebar .sidebar-item-container[data-id="Settings"] .item-anchor,
 .body-sidebar .shopify-pinned-settings .item-anchor {
 	font-weight: 500 !important;
+	font-size: var(--text-sm, 13.5px) !important;
 	color: var(--ink-gray-7, var(--text-color, #334155)) !important;
 	display: flex !important;
 	align-items: center !important;
-	height: 32px !important;
+	height: 34px !important;
 	padding: 0 8px !important;
-	border-radius: var(--radius, 6px) !important;
+	border-radius: var(--radius-4, 6px) !important;
 	transition: background-color 0.15s ease, color 0.15s ease !important;
 	text-decoration: none !important;
+	box-sizing: border-box !important;
 }
 
 .body-sidebar .sidebar-item-container[item-name="Settings"] .sidebar-item-icon,
+.body-sidebar .sidebar-item-container[data-id="Settings"] .sidebar-item-icon,
 .body-sidebar .shopify-pinned-settings .sidebar-item-icon {
 	color: var(--ink-gray-6, #64748b) !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	width: 18px !important;
+	height: 18px !important;
+	margin-right: 8px !important;
 }
 
 .body-sidebar .sidebar-item-container[item-name="Settings"] .sidebar-item-icon svg,
+.body-sidebar .sidebar-item-container[data-id="Settings"] .sidebar-item-icon svg,
 .body-sidebar .shopify-pinned-settings .sidebar-item-icon svg {
 	stroke: currentColor !important;
+	width: 16px !important;
+	height: 16px !important;
 }
 
 /* Hover State: Dark text with light gray background (crisp, clear, readable) */
 .body-sidebar .sidebar-item-container[item-name="Settings"]:hover .item-anchor,
+.body-sidebar .sidebar-item-container[data-id="Settings"]:hover .item-anchor,
 .body-sidebar .shopify-pinned-settings:hover .item-anchor,
 .body-sidebar .sidebar-item-container[item-name="Settings"] .item-anchor:hover,
+.body-sidebar .sidebar-item-container[data-id="Settings"] .item-anchor:hover,
 .body-sidebar .shopify-pinned-settings .item-anchor:hover {
 	color: var(--ink-gray-9, #0f172a) !important;
 	background-color: var(--surface-gray-2, rgba(0, 0, 0, 0.05)) !important;
 }
 
 .body-sidebar .sidebar-item-container[item-name="Settings"]:hover .sidebar-item-icon,
+.body-sidebar .sidebar-item-container[data-id="Settings"]:hover .sidebar-item-icon,
 .body-sidebar .shopify-pinned-settings:hover .sidebar-item-icon {
 	color: var(--ink-gray-9, #0f172a) !important;
 }
 
 /* Dark Theme overrides for Settings */
 [data-theme="dark"] .body-sidebar .sidebar-item-container[item-name="Settings"] .item-anchor,
+[data-theme="dark"] .body-sidebar .sidebar-item-container[data-id="Settings"] .item-anchor,
 [data-theme="dark"] .body-sidebar .shopify-pinned-settings .item-anchor {
 	color: var(--ink-gray-5, #cbd5e1) !important;
 }
 
 [data-theme="dark"] .body-sidebar .sidebar-item-container[item-name="Settings"]:hover .item-anchor,
+[data-theme="dark"] .body-sidebar .sidebar-item-container[data-id="Settings"]:hover .item-anchor,
 [data-theme="dark"] .body-sidebar .shopify-pinned-settings:hover .item-anchor,
 [data-theme="dark"] .body-sidebar .sidebar-item-container[item-name="Settings"] .item-anchor:hover,
+[data-theme="dark"] .body-sidebar .sidebar-item-container[data-id="Settings"] .item-anchor:hover,
 [data-theme="dark"] .body-sidebar .shopify-pinned-settings .item-anchor:hover {
 	color: #ffffff !important;
 	background-color: var(--surface-gray-2, rgba(255, 255, 255, 0.08)) !important;
