@@ -49,8 +49,8 @@ def admin_login(usr, pwd):
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
-@frappe.whitelist(allow_guest=True)
-def setup_hostinger_email(pwd="GharMart786@"):
+@frappe.whitelist()
+def setup_hostinger_email(pwd=None):
     """
     Configures official Hostinger SMTP Email Account for store notifications.
     """
