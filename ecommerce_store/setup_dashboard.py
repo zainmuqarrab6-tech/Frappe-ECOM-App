@@ -16,14 +16,13 @@ def setup_shopify_dashboard():
       <div>
         <div class="store-title-row">
           <h2 class="store-name" id="shp-store-name">ProStore Ecommerce</h2>
-          <span class="live-status-pill"><span class="dot"></span> Online Store Live</span>
+          <span class="live-status-pill"><span class="dot"></span> Headless Backend Active</span>
         </div>
         <p class="store-sub">Here's what's happening with your store today.</p>
       </div>
     </div>
     <div class="store-actions">
-      <a href="/store" target="_blank" class="shp-btn shp-btn-outline">🌐 View Storefront ↗</a>
-      <a href="/app/store-theme-settings" class="shp-btn shp-btn-outline">🎨 Theme Customizer</a>
+      <a href="/app/store-order" class="shp-btn shp-btn-outline">📦 View Orders</a>
       <a href="/app/product/new" class="shp-btn shp-btn-primary">+ Add Product</a>
     </div>
   </div>
@@ -493,21 +492,11 @@ frappe.call({
 
         {"type": "spacer", "data": {"col": 12}},
 
-        # 3. Storefront Design (Shopify Style)
-        {"type": "header", "data": {"text": "<span class='h4 font-weight-bold'>🎨 Storefront Design & Content</span>", "col": 12}},
-        {"type": "shortcut", "data": {"shortcut_name": "Store Customizer", "col": 3}},
-        {"type": "shortcut", "data": {"shortcut_name": "Hero Banners", "col": 3}},
-        {"type": "shortcut", "data": {"shortcut_name": "Navigation Menus", "col": 3}},
-        {"type": "shortcut", "data": {"shortcut_name": "Pages & Policies", "col": 3}},
-
-        {"type": "spacer", "data": {"col": 12}},
-
-        # 4. Modules
+        # 3. Modules
         {"type": "header", "data": {"text": "<span class='h4 font-weight-bold'>📂 Management Modules</span>", "col": 12}},
-        {"type": "card", "data": {"card_name": "Storefront Customizer", "col": 3}},
-        {"type": "card", "data": {"card_name": "Catalog Management", "col": 3}},
-        {"type": "card", "data": {"card_name": "Sales & Orders", "col": 3}},
-        {"type": "card", "data": {"card_name": "Customer & Marketing", "col": 3}}
+        {"type": "card", "data": {"card_name": "Catalog Management", "col": 4}},
+        {"type": "card", "data": {"card_name": "Sales & Orders", "col": 4}},
+        {"type": "card", "data": {"card_name": "Customer & Marketing", "col": 4}}
     ]
 
     ws_doc = frappe.get_doc("Workspace", "Ecommerce Store")
@@ -518,6 +507,11 @@ frappe.call({
         {"chart_name": "Orders by Status"},
         {"chart_name": "Daily Sales Trend"}
     ])
+
+    # Clean up storefront shortcuts & links
+    ws_doc.shortcuts = [s for s in ws_doc.shortcuts if s.label not in ("Visit Live Store", "Store Customizer")]
+    ws_doc.links = [l for l in ws_doc.links if l.label != "Storefront Customizer"]
+
     ws_doc.save(ignore_permissions=True)
     frappe.db.commit()
     print("Workspace updated with Shopify Store Overview successfully!")
