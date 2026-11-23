@@ -99,16 +99,20 @@ def get_products(category=None, brand=None, tag=None, search=None, sort_by="rece
         return {"status": "error", "message": str(e)}
 
 @frappe.whitelist(allow_guest=True)
-def get_product_detail(slug_or_id):
+def get_product_detail(slug_or_id=None, product_id=None, slug=None, id=None, **kwargs):
     """
     Returns full product details, gallery images, Shopify options, and variants.
     """
     try:
+        target = slug_or_id or product_id or slug or id
+        if not target:
+            return {"status": "error", "message": _("Product slug or ID is required"), "code": 400}
+
         product_name = None
-        if frappe.db.exists("Product", slug_or_id):
-            product_name = slug_or_id
+        if frappe.db.exists("Product", target):
+            product_name = target
         else:
-            product_name = frappe.db.get_value("Product", {"route_slug": slug_or_id, "is_active": 1}, "name")
+            product_name = frappe.db.get_value("Product", {"route_slug": target, "is_active": 1}, "name")
             
         if not product_name:
             return {"status": "error", "message": _("Product not found"), "code": 404}
