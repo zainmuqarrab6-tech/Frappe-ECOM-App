@@ -1,38 +1,46 @@
 import frappe
 from frappe import _
 import json
+import re
+import uuid
 from frappe.utils import today
 
 @frappe.whitelist(allow_guest=True)
 def create_order(
-    customer_name,
-    customer_email,
-    customer_phone,
-    shipping_address,
-    shipping_city,
+    customer_name=None,
+    customer_email=None,
+    customer_phone=None,
+    shipping_address=None,
+    shipping_city=None,
     shipping_postal_code=None,
     shipping_country="Pakistan",
     payment_method="Cash on Delivery",
     payment_id=None,
     customer_notes=None,
     cart_id=None,
-    items=None
+    items=None,
+    **kwargs
 ):
     """
     Creates an order from cart_id or direct JSON items array.
-    Deducts stock, links/creates customer, applies shipping/taxes, and returns order doc.
+    Deducts stock (supporting variants), links/creates customer, applies shipping/taxes, and returns order doc.
     """
     try:
         customer_name = (customer_name or "").strip()
-        customer_email = (customer_email or "").strip().lower()
         customer_phone = (customer_phone or "").strip()
         shipping_address = (shipping_address or "").strip()
         shipping_city = (shipping_city or "").strip()
+        customer_email = (customer_email or "").strip().lower()
 
-        if not customer_name or not customer_email or not customer_phone:
-            return {"status": "error", "message": _("Customer name, email and phone are required")}
+        if not customer_name or not customer_phone:
+            return {"status": "error", "message": _("Customer name and phone number are required")}
         if not shipping_address or not shipping_city:
             return {"status": "error", "message": _("Shipping address and city are required")}
+
+        # Fallback guest email for COD orders if none provided
+        if not customer_email:
+            clean_digits = re.sub(r"[^\d]", "", customer_phone)
+            customer_email = f"guest_{clean_digits or uuid.uuid4().hex[:8]}@store.local"
 
         # 1. Get Store Settings & Verify Policies
         settings = frappe.get_single("Store Settings")
@@ -76,7 +84,8 @@ def create_order(
         final_items = []
         for it in order_items:
             prod_id = it.get("product")
-            qty = max(1, int(it.get("quantity", 1)))
+            # Support both 'quantity' and 'qty'
+            qty = max(1, int(it.get("quantity") or it.get("qty") or 1))
             
             if not frappe.db.exists("Product", prod_id):
                 return {"status": "error", "message": _("Product {0} does not exist").format(prod_id)}
@@ -84,21 +93,53 @@ def create_order(
             prod = frappe.get_doc("Product", prod_id)
             if not prod.is_active:
                 return {"status": "error", "message": _("Product '{0}' is not currently available").format(prod.title)}
-                
-            if prod.track_inventory and prod.stock_quantity < qty:
-                return {"status": "error", "message": _("Product '{0}' has insufficient stock (Only {1} left in stock)").format(prod.title, prod.stock_quantity)}
 
-            line_total = round(float(prod.price) * qty, 2)
+            # Variant resolution
+            variant_match = None
+            var_identifier = it.get("variant") or it.get("variant_id") or it.get("attributes_summary")
+            if prod.has_variants and prod.variants and var_identifier:
+                for v in prod.variants:
+                    if v.name == var_identifier or v.sku == var_identifier or v.title == var_identifier:
+                        variant_match = v
+                        break
+
+            item_price = float(prod.price or 0)
+            item_sku = prod.sku
+            item_attr_summary = it.get("attributes_summary") or ""
+
+            if variant_match:
+                if float(variant_match.price or 0) > 0:
+                    item_price = float(variant_match.price)
+                if variant_match.sku:
+                    item_sku = variant_match.sku
+                item_attr_summary = variant_match.title
+                if prod.track_inventory and int(variant_match.stock_quantity or 0) < qty:
+                    return {
+                        "status": "error",
+                        "message": _("Variant '{0}' of '{1}' has insufficient stock (Only {2} left)").format(
+                            variant_match.title, prod.title, variant_match.stock_quantity
+                        )
+                    }
+            else:
+                if prod.track_inventory and prod.stock_quantity < qty:
+                    return {
+                        "status": "error",
+                        "message": _("Product '{0}' has insufficient stock (Only {1} left in stock)").format(
+                            prod.title, prod.stock_quantity
+                        )
+                    }
+
+            line_total = round(item_price * qty, 2)
             subtotal += line_total
             
             final_items.append({
                 "product": prod.name,
                 "product_name": prod.title,
-                "sku": prod.sku,
-                "price": prod.price,
+                "sku": item_sku,
+                "price": item_price,
                 "quantity": qty,
                 "total": line_total,
-                "attributes_summary": it.get("attributes_summary") or ""
+                "attributes_summary": item_attr_summary
             })
 
         subtotal = round(subtotal, 2)
@@ -159,7 +200,7 @@ def create_order(
             cust.insert(ignore_permissions=True)
             customer_id = cust.name
 
-        # 7. Create Store Order Doc
+        # 7. Create Store Order Doc (triggers after_insert to auto-deduct inventory)
         order = frappe.get_doc({
             "doctype": "Store Order",
             "naming_series": "ORD-.YYYY.-.#####",
@@ -186,22 +227,13 @@ def create_order(
         })
         order.insert(ignore_permissions=True)
 
-        # 8. Deduct Product Inventory
-        for it in final_items:
-            prod = frappe.get_doc("Product", it["product"])
-            if prod.track_inventory:
-                prod.stock_quantity = max(0, prod.stock_quantity - it["quantity"])
-                if prod.stock_quantity <= 0:
-                    prod.is_in_stock = 0
-                prod.save(ignore_permissions=True)
-
-        # 9. Update Coupon Usage Count
+        # 8. Update Coupon Usage Count
         if coupon_code and frappe.db.exists("Store Coupon", coupon_code):
             c_doc = frappe.get_doc("Store Coupon", coupon_code)
             c_doc.times_used = (c_doc.times_used or 0) + 1
             c_doc.save(ignore_permissions=True)
 
-        # 10. Clear Cart if order created from cart
+        # 9. Clear Cart if order created from cart
         if cart:
             cart.items = []
             cart.coupon_code = ""
@@ -230,15 +262,34 @@ def create_order(
         return {"status": "error", "message": str(e)}
 
 @frappe.whitelist(allow_guest=True)
-def get_order_detail(order_id):
+def get_order_detail(order_id, verification_phone=None, verification_email=None):
     """
     Returns order details including items, statuses and totals.
+    Requires authentication or matching phone/email verification to prevent scraping customer PII.
     """
     try:
         if not frappe.db.exists("Store Order", order_id):
             return {"status": "error", "message": _("Order not found")}
             
         order = frappe.get_doc("Store Order", order_id)
+
+        # Access Control Check
+        is_admin = frappe.session.user in ("Administrator",) or "System Manager" in frappe.get_roles()
+        is_owner = frappe.session.user != "Guest" and frappe.session.user.lower() == (order.customer_email or "").lower()
+        is_verified_guest = False
+
+        if frappe.session.user == "Guest":
+            if verification_phone and order.customer_phone and verification_phone.strip() in order.customer_phone:
+                is_verified_guest = True
+            elif verification_email and order.customer_email and verification_email.strip().lower() == order.customer_email.lower():
+                is_verified_guest = True
+
+        if not (is_admin or is_owner or is_verified_guest):
+            return {
+                "status": "error",
+                "message": _("Authentication or phone/email verification required to view full order details.")
+            }
+
         items = []
         for it in order.items:
             items.append({
@@ -286,17 +337,23 @@ def get_order_detail(order_id):
         return {"status": "error", "message": str(e)}
 
 @frappe.whitelist(allow_guest=True)
-def get_customer_orders(email):
+def get_customer_orders(email=None):
     """
     Returns list of past orders for a customer by email.
+    Requires authentication to prevent unauthorized order enumeration.
     """
     try:
-        if not email:
-            return {"status": "error", "message": _("Email is required")}
+        if frappe.session.user == "Guest":
+            return {"status": "error", "message": _("Authentication required. Please log in to view order history.")}
+
+        email = (email or frappe.session.user).strip().lower()
+        is_admin = frappe.session.user in ("Administrator",) or "System Manager" in frappe.get_roles()
+        if not is_admin and frappe.session.user.lower() != email:
+            return {"status": "error", "message": _("Not authorized to view orders for this email.")}
             
         orders = frappe.get_all(
             "Store Order",
-            filters={"customer_email": email.strip().lower()},
+            filters={"customer_email": email},
             fields=["name", "order_date", "order_status", "payment_status", "payment_method", "grand_total"],
             order_by="creation desc"
         )

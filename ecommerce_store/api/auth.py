@@ -95,13 +95,22 @@ def login_customer(usr, pwd):
         return {"status": "error", "message": str(e)}
 
 @frappe.whitelist(allow_guest=True)
-def get_customer_profile(email):
+def get_customer_profile(email=None):
     """
     Fetches customer profile and saved addresses.
+    Requires authentication to prevent IDOR / unauthorized data exposure.
     """
     try:
-        if not email:
-            return {"status": "error", "message": _("Email is required")}
+        if frappe.session.user == "Guest":
+            return {"status": "error", "message": _("Authentication required. Please log in.")}
+
+        # If email not specified, default to currently logged-in user
+        email = (email or frappe.session.user).strip().lower()
+
+        # Non-admins can only view their own profile
+        is_admin = frappe.session.user == "Administrator" or "System Manager" in frappe.get_roles()
+        if not is_admin and frappe.session.user.lower() != email:
+            return {"status": "error", "message": _("Not authorized to view this customer profile")}
 
         cust = frappe.db.get_value(
             "Store Customer",
@@ -125,21 +134,34 @@ def get_customer_profile(email):
 
 @frappe.whitelist(allow_guest=True)
 def save_customer_address(
-    customer_email,
-    address_line1,
-    city,
+    customer_email=None,
+    address_line1=None,
+    city=None,
     address_title="Home",
     address_line2=None,
     state=None,
     postal_code=None,
     country="Pakistan",
     phone=None,
-    is_default=0
+    is_default=0,
+    **kwargs
 ):
     """
     Adds or updates a saved address for a customer.
+    Requires authentication to prevent unauthorized profile tampering.
     """
     try:
+        if frappe.session.user == "Guest":
+            return {"status": "error", "message": _("Authentication required. Please log in.")}
+
+        customer_email = (customer_email or frappe.session.user).strip().lower()
+        if not address_line1 or not city:
+            return {"status": "error", "message": _("Address line 1 and city are required")}
+
+        is_admin = frappe.session.user == "Administrator" or "System Manager" in frappe.get_roles()
+        if not is_admin and frappe.session.user.lower() != customer_email:
+            return {"status": "error", "message": _("Not authorized to update this customer address")}
+
         customer_id = frappe.db.get_value("Store Customer", {"email": customer_email}, "name")
         if not customer_id:
             return {"status": "error", "message": _("Customer not found")}
@@ -147,15 +169,15 @@ def save_customer_address(
         addr = frappe.get_doc({
             "doctype": "Store Customer Address",
             "customer": customer_id,
-            "address_title": address_title,
+            "address_title": address_title or "Home",
             "address_line1": address_line1,
             "address_line2": address_line2 or "",
             "city": city,
             "state": state or "",
             "postal_code": postal_code or "",
-            "country": country,
+            "country": country or "Pakistan",
             "phone": phone or "",
-            "is_default": int(is_default)
+            "is_default": int(is_default or 0)
         })
         addr.insert(ignore_permissions=True)
         frappe.db.commit()

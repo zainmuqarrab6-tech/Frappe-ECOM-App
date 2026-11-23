@@ -7,12 +7,57 @@ from frappe.model.document import Document
 
 
 class StoreOrder(Document):
+    def after_insert(self):
+        # Auto-deduct inventory across all channels (Desk UI & Headless APIs)
+        if self.order_status != "Cancelled":
+            self.deduct_inventory()
+
     def before_save(self):
         # Auto-detect transition to Cancelled (handles both Desk UI save and cancel_order API)
         if not self.is_new():
             old_status = frappe.db.get_value("Store Order", self.name, "order_status")
             if old_status and old_status != "Cancelled" and self.order_status == "Cancelled":
                 self.restore_inventory_and_stats(reason=getattr(self, "_cancellation_reason", None) or "Order status set to Cancelled")
+
+    def deduct_inventory(self):
+        """
+        Deducts stock from Product or individual Product Variant when an order is created.
+        """
+        for item in self.items:
+            if not item.product or not frappe.db.exists("Product", item.product):
+                continue
+
+            prod = frappe.get_doc("Product", item.product)
+            if not prod.track_inventory:
+                continue
+
+            qty_to_deduct = int(item.quantity or 1)
+            deducted_from_variant = False
+
+            # Check if this item matches a product variant
+            if prod.has_variants and prod.variants:
+                for v in prod.variants:
+                    if (item.sku and v.sku == item.sku) or (item.attributes_summary and v.title == item.attributes_summary):
+                        v.stock_quantity = max(0, int(v.stock_quantity or 0) - qty_to_deduct)
+                        deducted_from_variant = True
+                        break
+
+            if not deducted_from_variant:
+                prod.stock_quantity = max(0, int(prod.stock_quantity or 0) - qty_to_deduct)
+
+            # Update stock status
+            if prod.stock_quantity <= 0 and not prod.continue_selling_out_of_stock:
+                prod.is_in_stock = 0
+
+            prod.save(ignore_permissions=True)
+            prod.add_comment(
+                "Info",
+                _("Deducted {0} unit(s) for Order {1}. Remaining stock: {2}").format(
+                    qty_to_deduct,
+                    f"<a href='/app/store-order/{self.name}'><b>{self.name}</b></a>",
+                    prod.stock_quantity
+                )
+            )
 
     @frappe.whitelist()
     def cancel_order(self, reason=None):
@@ -36,34 +81,44 @@ class StoreOrder(Document):
     def restore_inventory_and_stats(self, reason=None):
         """
         Reverts stock deductions, adjusts customer lifetime stats, and decrements coupon usage count.
+        Supports both standalone products and variant stock restorations.
         """
         # 1. Restore product inventory
         for item in self.items:
-            if not item.product:
-                continue
-            if not frappe.db.exists("Product", item.product):
+            if not item.product or not frappe.db.exists("Product", item.product):
                 continue
 
             prod = frappe.get_doc("Product", item.product)
-            if prod.track_inventory:
-                old_stock = int(prod.stock_quantity or 0)
-                restore_qty = int(item.quantity or 1)
-                new_stock = old_stock + restore_qty
+            if not prod.track_inventory:
+                continue
 
-                prod.stock_quantity = new_stock
-                prod.is_in_stock = 1
-                prod.save(ignore_permissions=True)
+            restore_qty = int(item.quantity or 1)
+            old_stock = int(prod.stock_quantity or 0)
+            restored_to_variant = False
 
-                prod.add_comment(
-                    "Info",
-                    _("Restored {0} unit(s) due to Order Cancellation {1} ({2}). Stock: {3} &rarr; {4}").format(
-                        restore_qty,
-                        f"<a href='/app/store-order/{self.name}'><b>{self.name}</b></a>",
-                        reason or "Cancelled",
-                        old_stock,
-                        new_stock
-                    )
+            if prod.has_variants and prod.variants:
+                for v in prod.variants:
+                    if (item.sku and v.sku == item.sku) or (item.attributes_summary and v.title == item.attributes_summary):
+                        v.stock_quantity = int(v.stock_quantity or 0) + restore_qty
+                        restored_to_variant = True
+                        break
+
+            if not restored_to_variant:
+                prod.stock_quantity = old_stock + restore_qty
+
+            prod.is_in_stock = 1
+            prod.save(ignore_permissions=True)
+
+            prod.add_comment(
+                "Info",
+                _("Restored {0} unit(s) due to Order Cancellation {1} ({2}). Stock: {3} &rarr; {4}").format(
+                    restore_qty,
+                    f"<a href='/app/store-order/{self.name}'><b>{self.name}</b></a>",
+                    reason or "Cancelled",
+                    old_stock,
+                    prod.stock_quantity
                 )
+            )
 
         # 2. Adjust Customer Lifetime Stats
         customer_doc = None
